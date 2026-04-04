@@ -422,7 +422,6 @@ const WorktreeList = React.memo(function WorktreeList() {
                 worktree={row.worktree}
                 repo={row.repo}
                 isActive={activeWorktreeId === row.worktree.id}
-                hideRepoBadge={groupBy === 'repo'}
               />
             </div>
           )
