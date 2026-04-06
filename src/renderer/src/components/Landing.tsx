@@ -1,88 +1,159 @@
-import { useMemo } from 'react'
+// FORK: action-first Landing page — repos, new worktree, recent activity.
+import { useState, useEffect, useMemo } from 'react'
 import { FolderPlus, GitBranchPlus } from 'lucide-react'
 import { useAppStore } from '../store'
+import { getRecentSessions, type SessionInfo } from '@/lib/session-providers'
+import { formatRelativeTime } from '@/lib/relative-time'
 import logo from '../../../../resources/logo.svg'
-
-type ShortcutItem = {
-  id: string
-  keys: string[]
-  action: string
-}
-
-function KeyCap({ label }: { label: string }): React.JSX.Element {
-  return (
-    <span className="inline-flex min-w-6 items-center justify-center rounded border border-border/80 bg-secondary/70 px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
-      {label}
-    </span>
-  )
-}
 
 export default function Landing(): React.JSX.Element {
   const repos = useAppStore((s) => s.repos)
   const addRepo = useAppStore((s) => s.addRepo)
   const openModal = useAppStore((s) => s.openModal)
+  const worktreesByRepo = useAppStore((s) => s.worktreesByRepo)
+  const setActiveWorktree = useAppStore((s) => s.setActiveWorktree)
+  const createTab = useAppStore((s) => s.createTab)
+  const queueTabStartupCommand = useAppStore((s) => s.queueTabStartupCommand)
+  const toolConfigs = useAppStore((s) => s.toolConfigs)
 
-  const canCreateWorktree = repos.length > 0
+  const [sessions, setSessions] = useState<SessionInfo[]>([])
 
-  const shortcuts = useMemo<ShortcutItem[]>(
-    () => [
-      { id: 'create', keys: ['⌘', 'N'], action: 'Create worktree' },
-      { id: 'up', keys: ['⌘', '⇧', '↑'], action: 'Move up worktree' },
-      { id: 'down', keys: ['⌘', '⇧', '↓'], action: 'Move down worktree' }
-    ],
-    []
-  )
+  useEffect(() => {
+    const result = getRecentSessions(null, 8)
+    setSessions(result)
+  }, [])
+
+  // Match sessions to worktree display names for badges
+  const allWorktrees = useMemo(() => {
+    return Object.values(worktreesByRepo).flat()
+  }, [worktreesByRepo])
+
+  const matchWorktree = (session: SessionInfo) => {
+    if (!session.worktreePath) {
+      return null
+    }
+    return allWorktrees.find((w) => session.worktreePath?.startsWith(w.path))
+  }
+
+  const handleSessionClick = (session: SessionInfo) => {
+    const wt = matchWorktree(session)
+    if (!wt) {
+      return
+    }
+    setActiveWorktree(wt.id)
+    // Small delay to let worktree activation settle, then create tab with resume
+    setTimeout(() => {
+      const tab = createTab(wt.id)
+      queueTabStartupCommand(tab.id, { command: session.resumeCommand })
+    }, 50)
+  }
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-background">
-      <div className="w-full max-w-lg px-6">
-        <div className="flex flex-col items-center gap-4 py-8">
-          <div
-            className="flex items-center justify-center size-20 rounded-2xl border border-border/80 shadow-lg shadow-black/40"
-            style={{ backgroundColor: '#12181e' }}
-          >
-            <img src={logo} alt="Orca logo" className="size-12" />
+    <div className="absolute inset-0 flex items-center justify-center bg-background overflow-auto">
+      <div className="w-full max-w-lg px-6 py-8">
+        <div className="flex flex-col items-center gap-5">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5">
+            <div
+              className="flex items-center justify-center size-8 rounded-lg border border-border/80 shadow-lg shadow-black/40"
+              style={{ backgroundColor: '#12181e' }}
+            >
+              <img src={logo} alt="Orca" className="size-5" />
+            </div>
+            <h1 className="text-lg font-bold text-foreground tracking-wide">ORCA</h1>
           </div>
-          <h1 className="text-4xl font-bold text-foreground tracking-tight">ORCA</h1>
 
-          <p className="text-sm text-muted-foreground text-center">
-            {canCreateWorktree
-              ? 'Select a worktree from the sidebar to begin.'
-              : 'Add a repository to get started.'}
-          </p>
+          {/* Primary: repos with create worktree */}
+          {repos.length > 0 && (
+            <div className="w-full max-w-sm">
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground/50 mb-2">
+                Start new work
+              </div>
+              <div className="flex flex-col gap-1">
+                {repos.map((repo) => {
+                  const worktreeCount = (worktreesByRepo[repo.id] ?? []).length
+                  return (
+                    <button
+                      key={repo.id}
+                      className="flex items-center gap-2.5 px-3.5 py-3 bg-secondary/30 border border-border/50 rounded-lg cursor-pointer hover:bg-accent/30 transition-colors w-full text-left outline-none"
+                      onClick={() => openModal('create-worktree', { preselectedRepoId: repo.id })}
+                    >
+                      <span style={{ color: repo.badgeColor }}>
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="size-4" aria-hidden>
+                          <path d="M3.5 4A1.5 1.5 0 0 0 2 5.5V7h3.879a2.5 2.5 0 0 1 1.768.732l1.414 1.415a.5.5 0 0 0 .354.146H18V7.5A1.5 1.5 0 0 0 16.5 6h-5.086a1 1 0 0 1-.707-.293L9.293 4.293A1 1 0 0 0 8.586 4H3.5Z" />
+                          <path d="M2 9.5v5A1.5 1.5 0 0 0 3.5 16h13a1.5 1.5 0 0 0 1.5-1.5v-5H9.415a2.5 2.5 0 0 1-1.768-.732L6.232 7.354a.5.5 0 0 0-.354-.147H2v2.293Z" />
+                        </svg>
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[13px] font-semibold text-foreground">
+                          {repo.displayName}
+                        </div>
+                        <div className="text-[11px] text-muted-foreground/50">
+                          {worktreeCount} worktree{worktreeCount !== 1 ? 's' : ''}
+                        </div>
+                      </div>
+                      <div className="text-[12px] text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md shrink-0">
+                        <GitBranchPlus className="size-3.5 inline mr-1" />
+                        New branch
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
-          <div className="flex items-center justify-center gap-2.5 flex-wrap">
+          {/* Secondary: add repo */}
+          <div className="w-full max-w-sm">
             <button
-              className="inline-flex items-center gap-1.5 bg-secondary/70 border border-border/80 text-foreground font-medium text-sm px-4 py-2 rounded-md cursor-pointer hover:bg-accent transition-colors"
+              className="flex items-center justify-center gap-2 w-full px-3.5 py-2.5 border border-dashed border-border/60 rounded-lg cursor-pointer hover:bg-accent/20 transition-colors text-muted-foreground/60 outline-none"
               onClick={addRepo}
             >
               <FolderPlus className="size-3.5" />
-              Add Repo
-            </button>
-
-            <button
-              className="inline-flex items-center gap-1.5 bg-secondary/70 border border-border/80 text-foreground font-medium text-sm px-4 py-2 rounded-md transition-colors disabled:opacity-40 disabled:cursor-not-allowed enabled:cursor-pointer enabled:hover:bg-accent"
-              disabled={!canCreateWorktree}
-              title={!canCreateWorktree ? 'Add a repo first' : undefined}
-              onClick={() => openModal('create-worktree')}
-            >
-              <GitBranchPlus className="size-3.5" />
-              Create Worktree
+              <span className="text-[13px]">Add new repository</span>
             </button>
           </div>
 
-          <div className="mt-6 w-full max-w-xs space-y-2">
-            {shortcuts.map((shortcut) => (
-              <div key={shortcut.id} className="grid grid-cols-[1fr_auto] items-center gap-3">
-                <span className="text-sm text-muted-foreground">{shortcut.action}</span>
-                <div className="flex items-center gap-1">
-                  {shortcut.keys.map((key) => (
-                    <KeyCap key={`${shortcut.id}-${key}`} label={key} />
-                  ))}
-                </div>
+          {/* Tertiary: recent activity */}
+          {sessions.length > 0 && (
+            <div className="w-full max-w-sm mt-2">
+              <div className="text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
+                Recent activity
               </div>
-            ))}
-          </div>
+              <div className="flex flex-col gap-0.5">
+                {sessions.map((session) => {
+                  const wt = matchWorktree(session)
+                  const toolColor =
+                    toolConfigs.find((t) => t.id === session.toolId)?.color ?? '#666'
+                  return (
+                    <button
+                      key={`${session.toolId}-${session.id}`}
+                      className="flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-accent/20 transition-colors w-full text-left outline-none disabled:opacity-40 disabled:cursor-not-allowed"
+                      onClick={() => handleSessionClick(session)}
+                      disabled={!wt}
+                      title={wt ? `Resume in ${wt.displayName}` : 'Worktree no longer exists'}
+                    >
+                      <div
+                        className="w-3 h-3 rounded-sm shrink-0"
+                        style={{ backgroundColor: toolColor }}
+                      />
+                      <span className="text-[12px] text-foreground/60 truncate flex-1">
+                        {session.title}
+                      </span>
+                      {wt && (
+                        <span className="text-[10px] text-muted-foreground/40 bg-secondary/50 px-1.5 py-0.5 rounded shrink-0">
+                          {wt.displayName}
+                        </span>
+                      )}
+                      <span className="text-[10px] text-muted-foreground/30 shrink-0">
+                        {formatRelativeTime(session.lastActiveAt)}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
