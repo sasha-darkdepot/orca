@@ -4,10 +4,10 @@ import type { GlobalSettings } from '../../../shared/types'
 
 export const BUILTIN_TERMINAL_THEME_NAMES = getThemeNames()
 
-export const DEFAULT_TERMINAL_THEME_DARK = 'Ghostty Default Style Dark'
-export const DEFAULT_TERMINAL_THEME_LIGHT = 'Builtin Tango Light'
-export const DEFAULT_TERMINAL_DIVIDER_DARK = '#3f3f46'
-export const DEFAULT_TERMINAL_DIVIDER_LIGHT = '#d4d4d8'
+export const DEFAULT_TERMINAL_THEME_DARK = 'Orca Dark'
+export const DEFAULT_TERMINAL_THEME_LIGHT = 'Orca Light'
+export const DEFAULT_TERMINAL_DIVIDER_DARK = '#262626'
+export const DEFAULT_TERMINAL_DIVIDER_LIGHT = '#e5e5e5'
 
 export type EffectiveTerminalAppearance = {
   mode: 'dark' | 'light'
@@ -51,13 +51,13 @@ export function resolveEffectiveTerminalAppearance(
 ): EffectiveTerminalAppearance {
   const sourceTheme =
     settings.theme === 'system' ? (systemPrefersDark ? 'dark' : 'light') : settings.theme
-  const useLightVariant = sourceTheme === 'light' && settings.terminalUseSeparateLightTheme
-  const themeName = useLightVariant
-    ? settings.terminalThemeLight || DEFAULT_TERMINAL_THEME_LIGHT
-    : settings.terminalThemeDark || DEFAULT_TERMINAL_THEME_DARK
-  const dividerColor = useLightVariant
-    ? normalizeColor(settings.terminalDividerColorLight, DEFAULT_TERMINAL_DIVIDER_LIGHT)
-    : normalizeColor(settings.terminalDividerColorDark, DEFAULT_TERMINAL_DIVIDER_DARK)
+
+  // FORK: always use Orca themes that match the app background.
+  // Ignores user-selected terminal themes — the terminal should look
+  // like a seamless part of the app, not a separate themed surface.
+  const isLight = sourceTheme === 'light'
+  const themeName = isLight ? DEFAULT_TERMINAL_THEME_LIGHT : DEFAULT_TERMINAL_THEME_DARK
+  const dividerColor = isLight ? DEFAULT_TERMINAL_DIVIDER_LIGHT : DEFAULT_TERMINAL_DIVIDER_DARK
 
   return {
     mode: sourceTheme,

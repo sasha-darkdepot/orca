@@ -50,5 +50,56 @@ export const DEFAULT_TERMINAL_THEMES: TerminalThemeMap = {
     brightMagenta: '#ad7fa8',
     brightCyan: '#34e2e2',
     brightWhite: '#eeeeec'
+  },
+
+  // FORK: app-matched themes — terminal background matches the app background
+  'Orca Dark': {
+    background: '#0a0a0a',
+    foreground: '#e5e5e5',
+    cursor: '#e5e5e5',
+    cursorAccent: '#0a0a0a',
+    selectionBackground: '#404040',
+    selectionForeground: '#fafafa',
+    black: '#171717',
+    red: '#f87171',
+    green: '#4ade80',
+    yellow: '#facc15',
+    blue: '#60a5fa',
+    magenta: '#c084fc',
+    cyan: '#22d3ee',
+    white: '#d4d4d4',
+    brightBlack: '#737373',
+    brightRed: '#fca5a5',
+    brightGreen: '#86efac',
+    brightYellow: '#fde68a',
+    brightBlue: '#93c5fd',
+    brightMagenta: '#d8b4fe',
+    brightCyan: '#67e8f9',
+    brightWhite: '#fafafa'
+  },
+
+  'Orca Light': {
+    background: '#ffffff',
+    foreground: '#171717',
+    cursor: '#171717',
+    cursorAccent: '#ffffff',
+    selectionBackground: '#bfdbfe',
+    selectionForeground: '#171717',
+    black: '#171717',
+    red: '#dc2626',
+    green: '#16a34a',
+    yellow: '#ca8a04',
+    blue: '#2563eb',
+    magenta: '#9333ea',
+    cyan: '#0891b2',
+    white: '#e5e5e5',
+    brightBlack: '#525252',
+    brightRed: '#ef4444',
+    brightGreen: '#22c55e',
+    brightYellow: '#eab308',
+    brightBlue: '#3b82f6',
+    brightMagenta: '#a855f7',
+    brightCyan: '#06b6d4',
+    brightWhite: '#fafafa'
   }
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+// FORK: useState removed — no longer needed after theme picker removal
 import type { GlobalSettings } from '../../../../shared/types'
 import {
   DEFAULT_TERMINAL_FONT_WEIGHT,
@@ -12,14 +12,10 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
-import { TerminalThemePreview } from './TerminalThemePreview'
+// FORK: TerminalThemePreview import removed — theme picker removed
 import { Minus, Plus } from 'lucide-react'
-import {
-  clampNumber,
-  resolveEffectiveTerminalAppearance,
-  resolvePaneStyleOptions
-} from '@/lib/terminal-theme'
-import { ThemePicker, ColorField, NumberField, FontAutocomplete } from './SettingsFormControls'
+import { clampNumber, resolvePaneStyleOptions } from '@/lib/terminal-theme'
+import { NumberField, FontAutocomplete } from './SettingsFormControls'
 import { SCROLLBACK_PRESETS_MB } from './SettingsConstants'
 
 type TerminalPaneProps = {
@@ -34,22 +30,12 @@ type TerminalPaneProps = {
 export function TerminalPane({
   settings,
   updateSettings,
-  systemPrefersDark,
+  systemPrefersDark: _systemPrefersDark,
   terminalFontSuggestions,
   scrollbackMode,
   setScrollbackMode
 }: TerminalPaneProps): React.JSX.Element {
-  const [themeSearchDark, setThemeSearchDark] = useState('')
-  const [themeSearchLight, setThemeSearchLight] = useState('')
-
-  const darkPreviewAppearance = resolveEffectiveTerminalAppearance(
-    { ...settings, theme: 'dark' },
-    systemPrefersDark
-  )
-  const lightPreviewAppearance = resolveEffectiveTerminalAppearance(
-    { ...settings, theme: 'light' },
-    systemPrefersDark
-  )
+  // FORK: theme search state and preview appearances removed — theme auto-matches app
   const paneStyleOptions = resolvePaneStyleOptions(settings)
   const scrollbackMb = Math.max(1, Math.round(settings.terminalScrollbackBytes / 1_000_000))
   const isPreset = SCROLLBACK_PRESETS_MB.includes(
@@ -239,112 +225,7 @@ export function TerminalPane({
         </div>
       </section>
 
-      <Separator />
-
-      <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-        <div className="space-y-6">
-          <ThemePicker
-            label="Dark Theme"
-            description="Choose the terminal theme used in dark mode."
-            selectedTheme={settings.terminalThemeDark}
-            query={themeSearchDark}
-            onQueryChange={setThemeSearchDark}
-            onSelectTheme={(theme) => updateSettings({ terminalThemeDark: theme })}
-          />
-
-          <ColorField
-            label="Dark Divider Color"
-            description="Controls the split divider line between panes in dark mode."
-            value={settings.terminalDividerColorDark}
-            fallback="#3f3f46"
-            onChange={(value) => updateSettings({ terminalDividerColorDark: value })}
-          />
-        </div>
-
-        <TerminalThemePreview
-          title="Dark Mode Preview"
-          description={
-            settings.theme === 'system'
-              ? `System mode is currently ${systemPrefersDark ? 'Dark' : 'Light'}.`
-              : `Orca is currently in ${settings.theme} mode.`
-          }
-          appearance={darkPreviewAppearance}
-          dividerThicknessPx={paneStyleOptions.dividerThicknessPx}
-          inactivePaneOpacity={paneStyleOptions.inactivePaneOpacity}
-          activePaneOpacity={paneStyleOptions.activePaneOpacity}
-        />
-      </section>
-
-      <Separator />
-
-      <section className="space-y-4">
-        <div className="flex items-center justify-between gap-4 px-1 py-2">
-          <div className="space-y-0.5">
-            <Label>Use Separate Theme In Light Mode</Label>
-            <p className="text-xs text-muted-foreground">
-              When disabled, light mode reuses the dark terminal theme.
-            </p>
-          </div>
-          <button
-            role="switch"
-            aria-checked={settings.terminalUseSeparateLightTheme}
-            onClick={() =>
-              updateSettings({
-                terminalUseSeparateLightTheme: !settings.terminalUseSeparateLightTheme
-              })
-            }
-            className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border border-transparent transition-colors ${
-              settings.terminalUseSeparateLightTheme ? 'bg-foreground' : 'bg-muted-foreground/30'
-            }`}
-          >
-            <span
-              className={`pointer-events-none block size-3.5 rounded-full bg-background shadow-sm transition-transform ${
-                settings.terminalUseSeparateLightTheme ? 'translate-x-4' : 'translate-x-0.5'
-              }`}
-            />
-          </button>
-        </div>
-
-        <div
-          className={`grid overflow-hidden transition-all duration-300 ease-out ${
-            settings.terminalUseSeparateLightTheme
-              ? 'grid-rows-[1fr] opacity-100'
-              : 'grid-rows-[0fr] opacity-0'
-          }`}
-        >
-          <div className="min-h-0">
-            <div className="grid gap-6 pt-2 xl:grid-cols-[minmax(0,1fr)_360px]">
-              <div className="space-y-6">
-                <ThemePicker
-                  label="Light Theme"
-                  description="Choose the theme used when Orca is in light mode."
-                  selectedTheme={settings.terminalThemeLight}
-                  query={themeSearchLight}
-                  onQueryChange={setThemeSearchLight}
-                  onSelectTheme={(theme) => updateSettings({ terminalThemeLight: theme })}
-                />
-
-                <ColorField
-                  label="Light Divider Color"
-                  description="Controls the split divider line between panes in light mode."
-                  value={settings.terminalDividerColorLight}
-                  fallback="#d4d4d8"
-                  onChange={(value) => updateSettings({ terminalDividerColorLight: value })}
-                />
-              </div>
-
-              <TerminalThemePreview
-                title="Light Mode Preview"
-                description="Updates live as you change the light theme or divider color."
-                appearance={lightPreviewAppearance}
-                dividerThicknessPx={paneStyleOptions.dividerThicknessPx}
-                inactivePaneOpacity={paneStyleOptions.inactivePaneOpacity}
-                activePaneOpacity={paneStyleOptions.activePaneOpacity}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* FORK: terminal theme pickers removed — theme auto-matches app light/dark mode */}
 
       <Separator />
 
