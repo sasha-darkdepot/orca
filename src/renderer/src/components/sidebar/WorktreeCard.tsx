@@ -5,6 +5,7 @@
 import React, { useEffect, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store'
 import { Archive, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 import StatusIndicator from './StatusIndicator'
 import WorktreeContextMenu from './WorktreeContextMenu'
 import { cn } from '@/lib/utils'
@@ -187,51 +188,80 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </div>
         </div>
 
-        {/* Line 2: PR link + branch + CI status */}
+        {/* Line 2: PR link + branch + CI status, with hover card */}
         {showPR && pr && (
-          <div className="flex items-center gap-1.5 mt-1 min-w-0">
-            <PullRequestIcon
-              className={cn(
-                'size-3.5 shrink-0',
-                pr.state === 'merged' && 'text-purple-500/80',
-                pr.state === 'open' && 'text-emerald-500/80',
-                pr.state === 'closed' && 'text-muted-foreground/60',
-                pr.state === 'draft' && 'text-muted-foreground/50',
-                (!pr.state || !['merged', 'open', 'closed', 'draft'].includes(pr.state)) &&
-                  'text-muted-foreground opacity-60'
-              )}
-            />
-            <a
-              href={pr.url}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[13px] text-foreground/60 font-medium shrink-0 hover:underline"
-              onClick={(e) => e.stopPropagation()}
-            >
-              #{pr.number}
-            </a>
-            <span className="text-[13px] text-muted-foreground/40 truncate">{branch}</span>
-
-            {/* Right side: CI check + conflict badge */}
-            <div className="flex items-center gap-1.5 ml-auto shrink-0">
-              {conflictOperation && conflictOperation !== 'unknown' && (
-                <span className="text-[13px] text-amber-500 dark:text-amber-400 whitespace-nowrap">
-                  ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
+          <HoverCard openDelay={300}>
+            <HoverCardTrigger asChild>
+              <div className="flex items-center gap-1.5 mt-1 min-w-0 cursor-pointer">
+                <PullRequestIcon
+                  className={cn(
+                    'size-3.5 shrink-0',
+                    pr.state === 'merged' && 'text-purple-500/80',
+                    pr.state === 'open' && 'text-emerald-500/80',
+                    pr.state === 'closed' && 'text-muted-foreground/60',
+                    pr.state === 'draft' && 'text-muted-foreground/50',
+                    (!pr.state || !['merged', 'open', 'closed', 'draft'].includes(pr.state)) &&
+                      'text-muted-foreground opacity-60'
+                  )}
+                />
+                <span className="text-[13px] text-foreground/60 font-medium shrink-0">
+                  #{pr.number}
                 </span>
-              )}
-              {showCI && pr.checksStatus !== 'neutral' && (
-                <>
-                  {pr.checksStatus === 'success' && (
-                    <CircleCheck className="size-3.5 text-emerald-500" />
+                <span className="text-[13px] text-muted-foreground/40 truncate">{branch}</span>
+
+                {/* Right side: CI check + conflict badge */}
+                <div className="flex items-center gap-1.5 ml-auto shrink-0">
+                  {conflictOperation && conflictOperation !== 'unknown' && (
+                    <span className="text-[13px] text-amber-500 dark:text-amber-400 whitespace-nowrap">
+                      ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
+                    </span>
                   )}
-                  {pr.checksStatus === 'failure' && <CircleX className="size-3.5 text-rose-500" />}
-                  {pr.checksStatus === 'pending' && (
-                    <LoaderCircle className="size-3.5 text-amber-500 animate-spin" />
+                  {showCI && pr.checksStatus !== 'neutral' && (
+                    <>
+                      {pr.checksStatus === 'success' && (
+                        <CircleCheck className="size-3.5 text-emerald-500" />
+                      )}
+                      {pr.checksStatus === 'failure' && (
+                        <CircleX className="size-3.5 text-rose-500" />
+                      )}
+                      {pr.checksStatus === 'pending' && (
+                        <LoaderCircle className="size-3.5 text-amber-500 animate-spin" />
+                      )}
+                    </>
                   )}
-                </>
-              )}
-            </div>
-          </div>
+                </div>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent side="right" align="start" className="w-72 p-3 text-xs space-y-1.5">
+              <div className="font-semibold text-[14px]">
+                #{pr.number} {pr.title}
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <span>State: {pr.state.charAt(0).toUpperCase() + pr.state.slice(1)}</span>
+                {pr.checksStatus !== 'neutral' && (
+                  <span>
+                    Checks:{' '}
+                    {pr.checksStatus === 'success'
+                      ? 'Passing'
+                      : pr.checksStatus === 'failure'
+                        ? 'Failing'
+                        : pr.checksStatus === 'pending'
+                          ? 'Pending'
+                          : ''}
+                  </span>
+                )}
+              </div>
+              <a
+                href={pr.url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
+                onClick={(e) => e.stopPropagation()}
+              >
+                View on GitHub
+              </a>
+            </HoverCardContent>
+          </HoverCard>
         )}
 
         {/* FORK: show branch name when no PR, so the card isn't empty */}
