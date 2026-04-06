@@ -3,7 +3,14 @@ import type { OrcaHooks } from '../../../../shared/types'
 import { useAppStore } from '../../store'
 import { ScrollArea } from '../ui/scroll-area'
 import { Button } from '../ui/button'
-import { ArrowLeft, Palette, SlidersHorizontal, SquareTerminal, Keyboard } from 'lucide-react'
+import {
+  ArrowLeft,
+  Palette,
+  SlidersHorizontal,
+  SquareTerminal,
+  Keyboard,
+  Wrench
+} from 'lucide-react'
 import { getSystemPrefersDark } from '@/lib/terminal-theme'
 import { SCROLLBACK_PRESETS_MB, getFallbackTerminalFonts } from './SettingsConstants'
 import { GeneralPane } from './GeneralPane'
@@ -11,6 +18,7 @@ import { AppearancePane } from './AppearancePane'
 import { ShortcutsPane } from './ShortcutsPane'
 import { TerminalPane } from './TerminalPane'
 import { RepositoryPane } from './RepositoryPane'
+import ToolsPane from './ToolsPane'
 
 function Settings(): React.JSX.Element {
   const settings = useAppStore((s) => s.settings)
@@ -24,7 +32,7 @@ function Settings(): React.JSX.Element {
   const clearSettingsTarget = useAppStore((s) => s.clearSettingsTarget)
 
   const [selectedPane, setSelectedPane] = useState<
-    'general' | 'appearance' | 'terminal' | 'shortcuts' | 'repo'
+    'general' | 'appearance' | 'terminal' | 'shortcuts' | 'tools' | 'repo'
   >('general')
   const [selectedRepoId, setSelectedRepoId] = useState<string | null>(null)
   const [repoHooksMap, setRepoHooksMap] = useState<
@@ -170,6 +178,7 @@ function Settings(): React.JSX.Element {
   const showAppearancePane = selectedPane === 'appearance'
   const showTerminalPane = selectedPane === 'terminal'
   const showShortcutsPane = selectedPane === 'shortcuts'
+  const showToolsPane = selectedPane === 'tools'
   const showRepoPane = selectedPane === 'repo' && !!selectedRepo
   const displayedGitUsername = (selectedRepo ?? repos[0])?.gitUsername ?? ''
 
@@ -203,6 +212,13 @@ function Settings(): React.JSX.Element {
     <div className="space-y-1">
       <h1 className="text-2xl font-semibold">Shortcuts</h1>
       <p className="text-sm text-muted-foreground">Keyboard shortcuts for common actions.</p>
+    </div>
+  ) : showToolsPane ? (
+    <div className="space-y-1">
+      <h1 className="text-2xl font-semibold">Tools</h1>
+      <p className="text-sm text-muted-foreground">
+        Configure which tools appear in the Launch Panel.
+      </p>
     </div>
   ) : selectedRepo ? (
     <div className="space-y-1">
@@ -284,6 +300,17 @@ function Settings(): React.JSX.Element {
                 <Keyboard className="mr-2 size-4" />
                 Shortcuts
               </button>
+              <button
+                onClick={() => setSelectedPane('tools')}
+                className={`flex w-full items-center rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                  showToolsPane
+                    ? 'bg-accent font-medium text-accent-foreground'
+                    : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground'
+                }`}
+              >
+                <Wrench className="mr-2 size-4" />
+                Tools
+              </button>
             </div>
 
             <div className="space-y-2">
@@ -352,6 +379,8 @@ function Settings(): React.JSX.Element {
               />
             ) : showShortcutsPane ? (
               <ShortcutsPane />
+            ) : showToolsPane ? (
+              <ToolsPane />
             ) : selectedRepo ? (
               <RepositoryPane
                 repo={selectedRepo}
