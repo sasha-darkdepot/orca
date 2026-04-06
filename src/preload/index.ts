@@ -228,6 +228,24 @@ const api = {
     homeDir: (): string => process.env.HOME ?? '/tmp'
   },
 
+  // FORK: AI tool session history (reads from main process, no sandbox restrictions)
+  aiSessions: {
+    getRecent: (args: {
+      worktreePath: string | null
+      limit: number
+    }): Promise<
+      {
+        id: string
+        toolId: string
+        title: string
+        startedAt: number
+        lastActiveAt: number
+        resumeCommand: string
+        worktreePath?: string
+      }[]
+    > => ipcRenderer.invoke('ai-sessions:getRecent', args)
+  },
+
   hooks: {
     check: (args: { repoId: string }): Promise<{ hasHooks: boolean; hooks: unknown }> =>
       ipcRenderer.invoke('hooks:check', args)

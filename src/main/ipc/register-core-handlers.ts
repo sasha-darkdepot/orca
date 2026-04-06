@@ -8,6 +8,7 @@ import { registerSessionHandlers } from './session'
 import { registerSettingsHandlers } from './settings'
 import { registerShellHandlers } from './shell'
 import { registerUIHandlers } from './ui'
+import { registerAiSessionHandlers } from './ai-sessions'
 import { warmSystemFontFamilies } from '../system-fonts'
 import {
   registerClipboardHandlers,
@@ -25,5 +26,6 @@ export function registerCoreHandlers(store: Store, runtime: OrcaRuntimeService):
   registerRuntimeHandlers(runtime)
   registerClipboardHandlers()
   registerUpdaterHandlers(store)
+  registerAiSessionHandlers() // FORK: AI tool session history for LaunchPanel
   warmSystemFontFamilies()
 }
