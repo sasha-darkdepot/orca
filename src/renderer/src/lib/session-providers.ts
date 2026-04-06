@@ -21,8 +21,11 @@ function decodeDirToPath(encoded: string): string {
 }
 
 function homePath(...segments: string[]): string {
-  // HOME is available via preload environment
-  const home = typeof process !== 'undefined' && process.env?.HOME ? process.env.HOME : '/tmp'
+  // Renderer is sandboxed — process.env is not available.
+  // Use window.electron.process.env exposed by @electron-toolkit/preload.
+  const electronProcess = (window as { electron?: { process?: { env: Record<string, string> } } })
+    .electron?.process
+  const home = electronProcess?.env?.HOME ?? '/tmp'
   return [home, ...segments].join('/')
 }
 
