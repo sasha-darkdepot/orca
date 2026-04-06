@@ -222,7 +222,10 @@ const api = {
 
     openFileUri: (uri: string): Promise<void> => ipcRenderer.invoke('shell:openFileUri', uri),
 
-    pathExists: (path: string): Promise<boolean> => ipcRenderer.invoke('shell:pathExists', path)
+    pathExists: (path: string): Promise<boolean> => ipcRenderer.invoke('shell:pathExists', path),
+
+    // FORK: expose HOME for session providers (renderer is sandboxed, no process.env)
+    homeDir: (): string => process.env.HOME ?? '/tmp'
   },
 
   hooks: {
