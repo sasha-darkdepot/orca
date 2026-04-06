@@ -88,6 +88,9 @@ const WorktreeList = React.memo(function WorktreeList() {
     // Filter archived
     all = all.filter((w) => !w.isArchived)
 
+    // FORK: hide the main worktree (root clone) — user works only in linked worktrees
+    all = all.filter((w) => !w.isMainWorktree)
+
     // Filter by repo
     if (filterRepoIds.length > 0) {
       const selectedRepoIds = new Set(filterRepoIds)
