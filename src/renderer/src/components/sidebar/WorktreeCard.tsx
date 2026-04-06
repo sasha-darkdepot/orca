@@ -4,7 +4,7 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store'
-import { Archive, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
+import { Trash2, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 import StatusIndicator from './StatusIndicator'
 import WorktreeContextMenu from './WorktreeContextMenu'
@@ -60,7 +60,6 @@ const WorktreeCard = React.memo(function WorktreeCard({
   const fetchIssue = useAppStore((s) => s.fetchIssue)
   const cardProps = useAppStore((s) => s.worktreeCardProperties)
 
-  const updateWorktreeMeta = useAppStore((s) => s.updateWorktreeMeta)
   const deleteState = useAppStore((s) => s.deleteStateByWorktreeId[worktree.id])
   const conflictOperation = useAppStore((s) => s.gitConflictOperationByWorktree[worktree.id])
   const tabs = useAppStore((s) => s.tabsByWorktree[worktree.id] ?? EMPTY_TABS)
@@ -134,13 +133,19 @@ const WorktreeCard = React.memo(function WorktreeCard({
     })
   }, [worktree.id, worktree.displayName, worktree.linkedIssue, worktree.comment, openModal])
 
-  // FORK: archive worktree on hover-button click
-  const handleArchive = useCallback(
+  const removeWorktree = useAppStore((s) => s.removeWorktree)
+
+  // FORK: remove worktree from disk on hover-button click.
+  // Uses the existing removeWorktree flow which handles PTY shutdown,
+  // tab cleanup, and git worktree remove. If git refuses (uncommitted
+  // changes), the delete state surfaces canForceDelete and the user
+  // can retry via the context menu's force-delete option.
+  const handleRemoveWorktree = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation()
-      updateWorktreeMeta(worktree.id, { isArchived: true })
+      removeWorktree(worktree.id, false)
     },
-    [worktree.id, updateWorktreeMeta]
+    [worktree.id, removeWorktree]
   )
 
   return (
@@ -165,15 +170,15 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </div>
         )}
 
-        {/* FORK: archive button — appears on hover, hidden when process is running */}
+        {/* FORK: remove worktree button — appears on hover */}
         {!isDeleting && (
           <button
             type="button"
-            onClick={handleArchive}
-            title="Archive"
+            onClick={handleRemoveWorktree}
+            title="Remove worktree"
             className="absolute right-2 top-2.5 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground hover:bg-accent/50"
           >
-            <Archive className="size-3.5" />
+            <Trash2 className="size-3.5" />
           </button>
         )}
 
