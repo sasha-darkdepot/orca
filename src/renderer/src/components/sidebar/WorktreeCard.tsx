@@ -4,7 +4,7 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useCallback } from 'react'
 import { useAppStore } from '@/store'
-import { CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
+import { Archive, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
 import WorktreeContextMenu from './WorktreeContextMenu'
 import { cn } from '@/lib/utils'
 import type { Worktree, Repo, PRInfo, GitConflictOperation } from '../../../../shared/types'
@@ -47,6 +47,7 @@ const WorktreeCard = React.memo(function WorktreeCard({
   const fetchIssue = useAppStore((s) => s.fetchIssue)
   const cardProps = useAppStore((s) => s.worktreeCardProperties)
 
+  const updateWorktreeMeta = useAppStore((s) => s.updateWorktreeMeta)
   const deleteState = useAppStore((s) => s.deleteStateByWorktreeId[worktree.id])
   const conflictOperation = useAppStore((s) => s.gitConflictOperationByWorktree[worktree.id])
 
@@ -102,6 +103,15 @@ const WorktreeCard = React.memo(function WorktreeCard({
     })
   }, [worktree.id, worktree.displayName, worktree.linkedIssue, worktree.comment, openModal])
 
+  // FORK: archive worktree on hover-button click
+  const handleArchive = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation()
+      updateWorktreeMeta(worktree.id, { isArchived: true })
+    },
+    [worktree.id, updateWorktreeMeta]
+  )
+
   return (
     <WorktreeContextMenu worktree={worktree}>
       <div
@@ -124,8 +134,20 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </div>
         )}
 
+        {/* FORK: archive button — appears on hover, hidden when process is running */}
+        {!isDeleting && (
+          <button
+            type="button"
+            onClick={handleArchive}
+            title="Archive"
+            className="absolute right-2 top-2.5 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground hover:bg-accent/50"
+          >
+            <Archive className="size-3.5" />
+          </button>
+        )}
+
         {/* Line 1: Worktree name */}
-        <div className="text-[14px] font-semibold text-foreground truncate leading-tight">
+        <div className="text-[14px] font-semibold text-foreground truncate leading-tight pr-6">
           {worktree.displayName}
         </div>
 
