@@ -161,12 +161,9 @@ export default function Terminal(): React.JSX.Element | null {
 
       const currentTabs = state.tabsByWorktree[owningWorktreeId] ?? []
       if (currentTabs.length <= 1) {
-        // Last tab in this worktree. Only clear the active worktree if this
-        // tab belongs to the currently focused worktree.
+        // FORK: last tab — close it but keep the worktree active so
+        // LaunchPanel shows instead of navigating away to Landing.
         closeTab(tabId)
-        if (state.activeWorktreeId === owningWorktreeId) {
-          setActiveWorktree(null)
-        }
         return
       }
 
