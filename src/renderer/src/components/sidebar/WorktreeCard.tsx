@@ -136,14 +136,12 @@ const WorktreeCard = React.memo(function WorktreeCard({
   const removeWorktree = useAppStore((s) => s.removeWorktree)
 
   // FORK: remove worktree from disk on hover-button click.
-  // Uses the existing removeWorktree flow which handles PTY shutdown,
-  // tab cleanup, and git worktree remove. If git refuses (uncommitted
-  // changes), the delete state surfaces canForceDelete and the user
-  // can retry via the context menu's force-delete option.
+  // Uses force=true because "Archive" is an intentional user action —
+  // uncommitted changes in a worktree being archived are expendable.
   const handleRemoveWorktree = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation()
-      removeWorktree(worktree.id, false)
+      removeWorktree(worktree.id, true)
     },
     [worktree.id, removeWorktree]
   )
