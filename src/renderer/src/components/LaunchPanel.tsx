@@ -136,7 +136,7 @@ export default function LaunchPanel({
                       title={`Resume: ${session.resumeCommand}`}
                     >
                       <div
-                        className="w-4 h-4 shrink-0 text-muted-foreground/60"
+                        className="w-4 h-4 shrink-0 text-foreground/50"
                         dangerouslySetInnerHTML={{
                           __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
                         }}

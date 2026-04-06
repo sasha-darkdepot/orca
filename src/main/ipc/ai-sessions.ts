@@ -34,7 +34,14 @@ function extractTitle(content: string): string {
             ? entry.message.content
             : (entry.message.content.find((b: { type: string; text?: string }) => b.type === 'text')
                 ?.text ?? '')
+        // Skip system-injected messages (local-command-caveat, system-reminder, etc.)
+        if (text.startsWith('<')) {
+          continue
+        }
         const firstLine = text.split('\n')[0].trim()
+        if (!firstLine) {
+          continue
+        }
         return firstLine.length > 60 ? `${firstLine.slice(0, 57)}...` : firstLine
       }
     } catch {
