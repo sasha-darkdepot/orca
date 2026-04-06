@@ -26,9 +26,9 @@ function ToolCard({
         onClick={() => setExpanded(!expanded)}
       >
         <div className="w-5 h-5 rounded-md shrink-0" style={{ backgroundColor: tool.color }} />
-        <span className="text-[13px] font-medium text-foreground flex-1">{tool.name}</span>
+        <span className="text-[15px] font-medium text-foreground flex-1">{tool.name}</span>
         {!tool.enabled && (
-          <span className="text-[10px] text-muted-foreground/50 bg-secondary/50 px-1.5 py-0.5 rounded">
+          <span className="text-[14px] text-muted-foreground/50 bg-secondary/50 px-1.5 py-0.5 rounded">
             off
           </span>
         )}
@@ -44,12 +44,12 @@ function ToolCard({
         <div className="px-3 pb-3 pt-1 border-t border-border/30 flex flex-col gap-3">
           {/* Display name */}
           <div>
-            <label className="text-[10px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
+            <label className="text-[14px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
               Display name
             </label>
             <input
               type="text"
-              className="w-full bg-background border border-border/50 rounded-md px-2.5 py-1.5 text-[12px] text-foreground outline-none focus:border-ring/50"
+              className="w-full bg-background border border-border/50 rounded-md px-2.5 py-1.5 text-[14px] text-foreground outline-none focus:border-ring/50"
               value={tool.name}
               onChange={(e) => onUpdate({ name: e.target.value })}
             />
@@ -57,12 +57,12 @@ function ToolCard({
 
           {/* Command */}
           <div>
-            <label className="text-[10px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
+            <label className="text-[14px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
               Command
             </label>
             <input
               type="text"
-              className="w-full bg-background border border-border/50 rounded-md px-2.5 py-1.5 text-[12px] text-foreground font-mono outline-none focus:border-ring/50"
+              className="w-full bg-background border border-border/50 rounded-md px-2.5 py-1.5 text-[14px] text-foreground font-mono outline-none focus:border-ring/50"
               value={tool.command}
               onChange={(e) => onUpdate({ command: e.target.value })}
             />
@@ -70,7 +70,7 @@ function ToolCard({
 
           {/* Color */}
           <div>
-            <label className="text-[10px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
+            <label className="text-[14px] uppercase tracking-wider text-muted-foreground/60 block mb-1">
               Color
             </label>
             <div className="flex gap-1.5">
@@ -92,7 +92,7 @@ function ToolCard({
           {/* Toggle + Remove */}
           <div className="flex items-center justify-between pt-1">
             <label className="flex items-center gap-2 cursor-pointer">
-              <span className="text-[12px] text-muted-foreground">Enabled</span>
+              <span className="text-[14px] text-muted-foreground">Enabled</span>
               <button
                 className="w-9 h-5 rounded-full transition-colors relative"
                 style={{ backgroundColor: tool.enabled ? '#3b82f6' : '#333' }}
@@ -109,7 +109,7 @@ function ToolCard({
             </label>
             {onRemove && (
               <button
-                className="text-[11px] text-destructive hover:underline outline-none flex items-center gap-1"
+                className="text-[15px] text-destructive hover:underline outline-none flex items-center gap-1"
                 onClick={onRemove}
               >
                 <Trash2 className="size-3" />
@@ -157,8 +157,8 @@ export default function ToolsPane(): React.JSX.Element {
   return (
     <div className="flex flex-col gap-4 p-6">
       <div>
-        <h3 className="text-[13px] font-semibold text-foreground mb-1">Tools</h3>
-        <p className="text-[11px] text-muted-foreground/60">
+        <h3 className="text-[15px] font-semibold text-foreground mb-1">Tools</h3>
+        <p className="text-[15px] text-muted-foreground/60">
           Configure which tools appear in the Launch Panel
         </p>
       </div>
@@ -178,7 +178,7 @@ export default function ToolsPane(): React.JSX.Element {
           onClick={addTool}
         >
           <Plus className="size-3.5" />
-          <span className="text-[13px]">Add custom tool</span>
+          <span className="text-[15px]">Add custom tool</span>
         </button>
       </div>
     </div>

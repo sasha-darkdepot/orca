@@ -299,12 +299,12 @@ const WorktreeList = React.memo(function WorktreeList() {
 
   if (worktrees.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-2 px-4 py-6 text-center text-[11px] text-muted-foreground">
+      <div className="flex flex-col items-center gap-2 px-4 py-6 text-center text-[14px] text-muted-foreground">
         <span>No worktrees found</span>
         {hasFilters && (
           <button
             onClick={clearFilters}
-            className="inline-flex items-center gap-1.5 bg-secondary/70 border border-border/80 text-foreground font-medium text-[11px] px-2.5 py-1 rounded-md cursor-pointer hover:bg-accent transition-colors"
+            className="inline-flex items-center gap-1.5 bg-secondary/70 border border-border/80 text-foreground font-medium text-[14px] px-2.5 py-1 rounded-md cursor-pointer hover:bg-accent transition-colors"
           >
             <CircleX className="size-3.5" />
             Clear Filters
@@ -362,10 +362,10 @@ const WorktreeList = React.memo(function WorktreeList() {
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <div className="truncate text-[13px] font-semibold leading-none lowercase">
+                      <div className="truncate text-[14px] font-semibold leading-none lowercase">
                         {row.label}
                       </div>
-                      <div className="rounded-full bg-black/12 px-1.5 py-0.5 text-[9px] font-medium leading-none text-muted-foreground/90">
+                      <div className="rounded-full bg-black/12 px-1.5 py-0.5 text-[14px] font-medium leading-none text-muted-foreground/90">
                         {row.count}
                       </div>
                     </div>

@@ -67,7 +67,7 @@ export default function Landing(): React.JSX.Element {
           {/* Primary: repos with create worktree */}
           {repos.length > 0 && (
             <div className="w-full max-w-sm">
-              <div className="text-[10px] uppercase tracking-wider text-muted-foreground/50 mb-2">
+              <div className="text-[14px] uppercase tracking-wider text-muted-foreground/50 mb-2">
                 Start new work
               </div>
               <div className="flex flex-col gap-1">
@@ -86,14 +86,14 @@ export default function Landing(): React.JSX.Element {
                         </svg>
                       </span>
                       <div className="flex-1 min-w-0">
-                        <div className="text-[13px] font-semibold text-foreground">
+                        <div className="text-[15px] font-semibold text-foreground">
                           {repo.displayName}
                         </div>
-                        <div className="text-[11px] text-muted-foreground/50">
+                        <div className="text-[15px] text-muted-foreground/50">
                           {worktreeCount} worktree{worktreeCount !== 1 ? 's' : ''}
                         </div>
                       </div>
-                      <div className="text-[12px] text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md shrink-0">
+                      <div className="text-[14px] text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-md shrink-0">
                         <GitBranchPlus className="size-3.5 inline mr-1" />
                         New branch
                       </div>
@@ -111,14 +111,14 @@ export default function Landing(): React.JSX.Element {
               onClick={addRepo}
             >
               <FolderPlus className="size-3.5" />
-              <span className="text-[13px]">Add new repository</span>
+              <span className="text-[15px]">Add new repository</span>
             </button>
           </div>
 
           {/* Tertiary: recent activity */}
           {sessions.length > 0 && (
             <div className="w-full max-w-sm mt-2">
-              <div className="text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
+              <div className="text-[14px] uppercase tracking-wider text-muted-foreground/40 mb-2">
                 Recent activity
               </div>
               <div className="flex flex-col gap-0.5">
@@ -138,15 +138,15 @@ export default function Landing(): React.JSX.Element {
                           __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
                         }}
                       />
-                      <span className="text-[12px] text-foreground/60 truncate flex-1">
+                      <span className="text-[14px] text-foreground/60 truncate flex-1">
                         {session.title}
                       </span>
                       {wt && (
-                        <span className="text-[10px] text-muted-foreground/40 bg-secondary/50 px-1.5 py-0.5 rounded shrink-0">
+                        <span className="text-[14px] text-muted-foreground/40 bg-secondary/50 px-1.5 py-0.5 rounded shrink-0">
                           {wt.displayName}
                         </span>
                       )}
-                      <span className="text-[10px] text-muted-foreground/30 shrink-0">
+                      <span className="text-[14px] text-muted-foreground/30 shrink-0">
                         {formatRelativeTime(session.lastActiveAt)}
                       </span>
                     </button>

@@ -154,6 +154,8 @@
 
   body {
     @apply bg-background text-foreground;
+    /* FORK: bump base font size — upstream uses 11-12px which is too small */
+    font-size: 14px;
     margin: 0;
     padding: 0;
     overflow: hidden;

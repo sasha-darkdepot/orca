@@ -97,7 +97,7 @@ export default function LaunchPanel({
     <div className="absolute inset-0 flex items-center justify-center bg-background overflow-auto">
       <div className="w-full max-w-md px-6 py-8 flex flex-col items-center">
         {/* Worktree name */}
-        <div className="text-[13px] uppercase tracking-widest text-muted-foreground/60 mb-5">
+        <div className="text-[15px] uppercase tracking-widest text-muted-foreground/60 mb-5">
           {worktreeName}
         </div>
 
@@ -114,7 +114,7 @@ export default function LaunchPanel({
                 className="w-10 h-10 text-foreground/80"
                 dangerouslySetInnerHTML={{ __html: TOOL_ICONS[tool.id] ?? GENERIC_TOOL_ICON }}
               />
-              <span className="text-[13px] text-muted-foreground">{tool.name}</span>
+              <span className="text-[15px] text-muted-foreground">{tool.name}</span>
             </button>
           ))}
         </div>
@@ -124,7 +124,7 @@ export default function LaunchPanel({
           <div className="w-full max-w-sm">
             {sessionGroups.map((group) => (
               <div key={group.label} className="mb-3">
-                <div className="text-[12px] uppercase tracking-wider text-muted-foreground/50 mb-2 px-1">
+                <div className="text-[14px] uppercase tracking-wider text-muted-foreground/50 mb-2 px-1">
                   {group.label}
                 </div>
                 <div className="flex flex-col gap-0.5">
@@ -144,7 +144,7 @@ export default function LaunchPanel({
                       <span className="text-[14px] text-foreground/70 truncate flex-1">
                         {session.title}
                       </span>
-                      <span className="text-[13px] text-muted-foreground/40 shrink-0">
+                      <span className="text-[15px] text-muted-foreground/40 shrink-0">
                         {formatRelativeTime(session.lastActiveAt)}
                       </span>
                     </button>
@@ -156,7 +156,7 @@ export default function LaunchPanel({
         )}
 
         {sessions.length === 0 && (
-          <div className="text-[12px] text-muted-foreground/40 mt-2">No recent sessions</div>
+          <div className="text-[14px] text-muted-foreground/40 mt-2">No recent sessions</div>
         )}
       </div>
     </div>

@@ -156,7 +156,7 @@ const WorktreeCard = React.memo(function WorktreeCard({
       >
         {isDeleting && (
           <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-background/50 backdrop-blur-[1px]">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-background px-3 py-1 text-[11px] font-medium text-foreground shadow-sm border border-border/50">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-background px-3 py-1 text-[13px] font-medium text-foreground shadow-sm border border-border/50">
               <LoaderCircle className="size-3.5 animate-spin text-muted-foreground" />
               Deleting…
             </div>
@@ -201,17 +201,17 @@ const WorktreeCard = React.memo(function WorktreeCard({
               href={pr.url}
               target="_blank"
               rel="noreferrer"
-              className="text-[12px] text-foreground/80 font-medium shrink-0 hover:underline"
+              className="text-[14px] text-foreground/80 font-medium shrink-0 hover:underline"
               onClick={(e) => e.stopPropagation()}
             >
               #{pr.number}
             </a>
-            <span className="text-[12px] text-muted-foreground truncate">{pr.title}</span>
+            <span className="text-[14px] text-muted-foreground truncate">{pr.title}</span>
 
             {/* Right side: CI check + conflict badge */}
             <div className="flex items-center gap-1.5 ml-auto shrink-0">
               {conflictOperation && conflictOperation !== 'unknown' && (
-                <span className="text-[11px] text-amber-500 dark:text-amber-400 whitespace-nowrap">
+                <span className="text-[13px] text-amber-500 dark:text-amber-400 whitespace-nowrap">
                   ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
                 </span>
               )}
@@ -233,7 +233,7 @@ const WorktreeCard = React.memo(function WorktreeCard({
         {/* Conflict badge shown even without PR */}
         {!(showPR && pr) && conflictOperation && conflictOperation !== 'unknown' && (
           <div className="flex items-center gap-1 mt-1.5">
-            <span className="text-[11px] text-amber-500 dark:text-amber-400">
+            <span className="text-[13px] text-amber-500 dark:text-amber-400">
               ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
             </span>
           </div>
