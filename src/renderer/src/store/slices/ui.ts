@@ -2,6 +2,7 @@ import type { StateCreator } from 'zustand'
 import type { AppState } from '../types'
 import type { PersistedUIState, UpdateStatus, WorktreeCardProperty } from '../../../../shared/types'
 import { DEFAULT_WORKTREE_CARD_PROPERTIES } from '../../../../shared/constants'
+import { type ToolConfig, DEFAULT_TOOLS } from '@/lib/tool-defaults'
 
 type LegacyPersistedSortBy = PersistedUIState['sortBy'] | 'smart'
 
@@ -45,6 +46,8 @@ export type UISlice = {
   setFilterRepoIds: (ids: string[]) => void
   worktreeCardProperties: WorktreeCardProperty[]
   toggleWorktreeCardProperty: (prop: WorktreeCardProperty) => void
+  toolConfigs: ToolConfig[]
+  setToolConfigs: (configs: ToolConfig[]) => void
   pendingRevealWorktreeId: string | null
   revealWorktreeInSidebar: (worktreeId: string) => void
   clearPendingRevealWorktreeId: () => void
@@ -101,6 +104,18 @@ export const createUISlice: StateCreator<AppState, [], [], UISlice> = (set) => (
       return { worktreeCardProperties: updated }
     }),
 
+  toolConfigs: [...DEFAULT_TOOLS],
+  setToolConfigs: (configs) =>
+    set(() => {
+      // FORK: toolConfigs is not yet in PersistedUIState (upstream shared type). Cast to bypass
+      // the type constraint so we can persist without touching upstream src/shared/types.ts.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window.api.ui.set as (args: any) => Promise<void>)({ toolConfigs: configs }).catch(
+        console.error
+      )
+      return { toolConfigs: configs }
+    }),
+
   pendingRevealWorktreeId: null,
   revealWorktreeInSidebar: (worktreeId) => set({ pendingRevealWorktreeId: worktreeId }),
   clearPendingRevealWorktreeId: () => set({ pendingRevealWorktreeId: null }),
@@ -125,6 +140,10 @@ export const createUISlice: StateCreator<AppState, [], [], UISlice> = (set) => (
         showActiveOnly: ui.showActiveOnly,
         filterRepoIds: (ui.filterRepoIds ?? []).filter((repoId) => validRepoIds.has(repoId)),
         worktreeCardProperties: ui.worktreeCardProperties ?? [...DEFAULT_WORKTREE_CARD_PROPERTIES],
+        // FORK: toolConfigs is persisted but not in PersistedUIState (upstream). Cast to read it.
+        ...((ui as Record<string, unknown>).toolConfigs
+          ? { toolConfigs: (ui as Record<string, unknown>).toolConfigs as ToolConfig[] }
+          : {}),
         dismissedUpdateVersion: ui.dismissedUpdateVersion ?? null,
         persistedUIReady: true
       }
