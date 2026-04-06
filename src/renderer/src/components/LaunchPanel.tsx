@@ -5,6 +5,7 @@ import { useAppStore } from '@/store'
 import { getRecentSessions, type SessionInfo } from '@/lib/session-providers'
 import { formatRelativeTime } from '@/lib/relative-time'
 import type { ToolConfig } from '@/lib/tool-defaults'
+import { TOOL_ICONS, GENERIC_TOOL_ICON } from '@/lib/tool-icons'
 
 function groupSessionsByPeriod(
   sessions: SessionInfo[]
@@ -109,7 +110,10 @@ export default function LaunchPanel({
               onClick={() => launchTool(tool)}
               title={`Launch ${tool.name} (${index + 1})`}
             >
-              <div className="w-7 h-7 rounded-md" style={{ backgroundColor: tool.color }} />
+              <div
+                className="w-7 h-7 text-foreground/80"
+                dangerouslySetInnerHTML={{ __html: TOOL_ICONS[tool.id] ?? GENERIC_TOOL_ICON }}
+              />
               <span className="text-[11px] text-muted-foreground">{tool.name}</span>
             </button>
           ))}
@@ -132,10 +136,9 @@ export default function LaunchPanel({
                       title={`Resume: ${session.resumeCommand}`}
                     >
                       <div
-                        className="w-3 h-3 rounded-sm shrink-0"
-                        style={{
-                          backgroundColor:
-                            toolConfigs.find((t) => t.id === session.toolId)?.color ?? '#666'
+                        className="w-4 h-4 shrink-0 text-muted-foreground/60"
+                        dangerouslySetInnerHTML={{
+                          __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
                         }}
                       />
                       <span className="text-[12px] text-foreground/70 truncate flex-1">

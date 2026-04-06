@@ -4,6 +4,7 @@ import { FolderPlus, GitBranchPlus } from 'lucide-react'
 import { useAppStore } from '../store'
 import { getRecentSessions, type SessionInfo } from '@/lib/session-providers'
 import { formatRelativeTime } from '@/lib/relative-time'
+import { TOOL_ICONS, GENERIC_TOOL_ICON } from '@/lib/tool-icons'
 import logo from '../../../../resources/logo.svg'
 
 export default function Landing(): React.JSX.Element {
@@ -14,7 +15,6 @@ export default function Landing(): React.JSX.Element {
   const setActiveWorktree = useAppStore((s) => s.setActiveWorktree)
   const createTab = useAppStore((s) => s.createTab)
   const queueTabStartupCommand = useAppStore((s) => s.queueTabStartupCommand)
-  const toolConfigs = useAppStore((s) => s.toolConfigs)
 
   const [sessions, setSessions] = useState<SessionInfo[]>([])
 
@@ -124,8 +124,6 @@ export default function Landing(): React.JSX.Element {
               <div className="flex flex-col gap-0.5">
                 {sessions.map((session) => {
                   const wt = matchWorktree(session)
-                  const toolColor =
-                    toolConfigs.find((t) => t.id === session.toolId)?.color ?? '#666'
                   return (
                     <button
                       key={`${session.toolId}-${session.id}`}
@@ -135,8 +133,10 @@ export default function Landing(): React.JSX.Element {
                       title={wt ? `Resume in ${wt.displayName}` : 'Worktree no longer exists'}
                     >
                       <div
-                        className="w-3 h-3 rounded-sm shrink-0"
-                        style={{ backgroundColor: toolColor }}
+                        className="w-4 h-4 shrink-0 text-muted-foreground/60"
+                        dangerouslySetInnerHTML={{
+                          __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
+                        }}
                       />
                       <span className="text-[12px] text-foreground/60 truncate flex-1">
                         {session.title}
