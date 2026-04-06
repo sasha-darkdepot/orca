@@ -9,6 +9,7 @@ import StatusIndicator from './StatusIndicator'
 import WorktreeContextMenu from './WorktreeContextMenu'
 import { cn } from '@/lib/utils'
 import { detectAgentStatusFromTitle } from '@/lib/agent-status'
+import { humanizeBranchName } from '@/lib/branch-display-name'
 import type {
   Worktree,
   Repo,
@@ -175,17 +176,18 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </button>
         )}
 
-        {/* Line 1: Status dot + Worktree name */}
+        {/* Line 1: Status dot + Human-readable name */}
         <div className="flex items-center gap-2 pr-6 min-w-0">
           {cardProps.includes('status') && <StatusIndicator status={status} className="shrink-0" />}
           <div className="text-[14px] font-semibold text-foreground truncate leading-tight">
-            {worktree.displayName}
+            {/* FORK: use PR title if available, otherwise humanize branch name */}
+            {showPR && pr?.title ? pr.title : humanizeBranchName(worktree.branch)}
           </div>
         </div>
 
-        {/* Line 2: PR info (only if PR exists and pr card property is enabled) */}
+        {/* Line 2: PR link + branch + CI status */}
         {showPR && pr && (
-          <div className="flex items-center gap-1.5 mt-1.5 min-w-0">
+          <div className="flex items-center gap-1.5 mt-1 min-w-0">
             <PullRequestIcon
               className={cn(
                 'size-3.5 shrink-0',
@@ -201,12 +203,12 @@ const WorktreeCard = React.memo(function WorktreeCard({
               href={pr.url}
               target="_blank"
               rel="noreferrer"
-              className="text-[14px] text-foreground/80 font-medium shrink-0 hover:underline"
+              className="text-[13px] text-foreground/60 font-medium shrink-0 hover:underline"
               onClick={(e) => e.stopPropagation()}
             >
               #{pr.number}
             </a>
-            <span className="text-[14px] text-muted-foreground truncate">{pr.title}</span>
+            <span className="text-[13px] text-muted-foreground/40 truncate">{branch}</span>
 
             {/* Right side: CI check + conflict badge */}
             <div className="flex items-center gap-1.5 ml-auto shrink-0">
