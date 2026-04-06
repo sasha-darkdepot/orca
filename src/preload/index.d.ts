@@ -206,6 +206,21 @@ type GitApi = {
   }) => Promise<string | null>
 }
 
+// FORK: AI session history IPC
+type AiSessionsApi = {
+  getRecent: (args: { worktreePath: string | null; limit: number }) => Promise<
+    {
+      id: string
+      toolId: string
+      title: string
+      startedAt: number
+      lastActiveAt: number
+      resumeCommand: string
+      worktreePath?: string
+    }[]
+  >
+}
+
 type Api = {
   repos: ReposApi
   worktrees: WorktreesApi
@@ -222,6 +237,7 @@ type Api = {
   git: GitApi
   ui: UIApi
   runtime: RuntimeApi
+  aiSessions: AiSessionsApi
 }
 
 declare global {
