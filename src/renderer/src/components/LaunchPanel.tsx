@@ -102,19 +102,19 @@ export default function LaunchPanel({
         </div>
 
         {/* Tool buttons */}
-        <div className="flex gap-3 mb-7">
+        <div className="flex gap-4 mb-8">
           {enabledTools.map((tool, index) => (
             <button
               key={tool.id}
-              className="flex flex-col items-center gap-1.5 w-[72px] py-3.5 bg-secondary/50 border border-border/60 rounded-xl cursor-pointer hover:bg-accent/50 transition-colors outline-none focus:ring-1 focus:ring-ring"
+              className="flex flex-col items-center gap-2 w-[96px] py-5 bg-secondary/50 border border-border/60 rounded-xl cursor-pointer hover:bg-accent/50 transition-colors outline-none focus:ring-1 focus:ring-ring"
               onClick={() => launchTool(tool)}
               title={`Launch ${tool.name} (${index + 1})`}
             >
               <div
-                className="w-7 h-7 text-foreground/80"
+                className="w-10 h-10 text-foreground/80"
                 dangerouslySetInnerHTML={{ __html: TOOL_ICONS[tool.id] ?? GENERIC_TOOL_ICON }}
               />
-              <span className="text-[11px] text-muted-foreground">{tool.name}</span>
+              <span className="text-[12px] text-muted-foreground">{tool.name}</span>
             </button>
           ))}
         </div>

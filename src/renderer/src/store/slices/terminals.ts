@@ -381,12 +381,32 @@ export const createTerminalSlice: StateCreator<AppState, [], [], TerminalSlice> 
           .flat()
           .map((worktree) => worktree.id)
       )
+
+      // FORK: check if a tab has meaningful scrollback content worth preserving.
+      // Tabs with only empty shells (no real output) are discarded so the
+      // LaunchPanel can show instead.
+      const hasValuableScrollback = (tabId: string): boolean => {
+        const layout = session.terminalLayoutsByTabId[tabId]
+        if (!layout?.buffersByLeafId) {
+          return false
+        }
+        for (const buffer of Object.values(layout.buffersByLeafId)) {
+          // A buffer with more than a few lines of content likely has real output,
+          // not just a shell prompt. Threshold: 200 chars covers a prompt + blank lines.
+          if (buffer && buffer.length > 200) {
+            return true
+          }
+        }
+        return false
+      }
+
       const tabsByWorktree: Record<string, TerminalTab[]> = Object.fromEntries(
         Object.entries(session.tabsByWorktree)
           .filter(([worktreeId]) => validWorktreeIds.has(worktreeId))
           .map(([worktreeId, tabs]) => [
             worktreeId,
             [...tabs]
+              .filter((tab) => hasValuableScrollback(tab.id))
               .sort((a, b) => a.sortOrder - b.sortOrder || a.createdAt - b.createdAt)
               .map((tab, index) => ({
                 ...clearTransientTerminalState(tab, index),
