@@ -88,8 +88,17 @@ const WorktreeList = React.memo(function WorktreeList() {
     // Filter archived
     all = all.filter((w) => !w.isArchived)
 
-    // FORK: hide the main worktree (root clone) — user works only in linked worktrees
-    all = all.filter((w) => !w.isMainWorktree)
+    // FORK: hide main/master worktrees and bare checkouts — user works only
+    // in feature branches. Main worktree is the git backbone, bare worktrees
+    // are detached HEAD checkouts (codex, tmp).
+    const HIDDEN_BRANCHES = new Set(['main', 'master', 'develop'])
+    all = all.filter((w) => {
+      if (w.isBare || w.isMainWorktree) {
+        return false
+      }
+      const branchName = w.branch.replace(/^refs\/heads\//, '')
+      return !HIDDEN_BRANCHES.has(branchName)
+    })
 
     // Filter by repo
     if (filterRepoIds.length > 0) {
