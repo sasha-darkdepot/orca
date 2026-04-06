@@ -80,6 +80,8 @@ async function getClaudeSessions(
     if (!exists) {
       return []
     }
+    // Authorize access to ~/.claude/projects/ which is outside repo roots
+    await window.api.fs.authorizeExternalPath({ targetPath: claudeDir })
   } catch {
     return []
   }
