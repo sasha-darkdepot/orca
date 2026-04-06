@@ -1,7 +1,8 @@
 import type { BrowserWindow } from 'electron'
 import { ipcMain } from 'electron'
 import { execFileSync } from 'child_process'
-import { rm } from 'fs/promises'
+import { rm, access } from 'fs/promises'
+import { join } from 'path'
 import type { Store } from '../persistence'
 import type {
   CreateWorktreeArgs,
@@ -194,6 +195,20 @@ export function registerWorktreeHandlers(mainWindow: BrowserWindow, store: Store
       const repo = store.getRepo(repoId)
       if (!repo) {
         throw new Error(`Repo not found: ${repoId}`)
+      }
+
+      // FORK: if the directory is missing or has no .git, it's a ghost worktree —
+      // clean up metadata without calling git (git doesn't know about it).
+      const isGhost = await access(join(worktreePath, '.git'))
+        .then(() => false)
+        .catch(() => true)
+
+      if (isGhost) {
+        console.warn(`[worktrees] Ghost worktree at ${worktreePath}, cleaning metadata`)
+        await rm(worktreePath, { recursive: true, force: true }).catch(() => {})
+        store.removeWorktreeMeta(args.worktreeId)
+        notifyWorktreesChanged(mainWindow, repoId)
+        return
       }
 
       // Run archive hook before removal
