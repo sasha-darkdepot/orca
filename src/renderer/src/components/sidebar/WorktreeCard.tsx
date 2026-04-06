@@ -4,7 +4,7 @@
 /* eslint-disable max-lines */
 import React, { useEffect, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store'
-import { Trash2, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
+import { Archive, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@/components/ui/hover-card'
 import StatusIndicator from './StatusIndicator'
 import WorktreeContextMenu from './WorktreeContextMenu'
@@ -175,10 +175,10 @@ const WorktreeCard = React.memo(function WorktreeCard({
           <button
             type="button"
             onClick={handleRemoveWorktree}
-            title="Remove worktree"
+            title="Archive worktree"
             className="absolute right-2 top-2.5 p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground hover:bg-accent/50"
           >
-            <Trash2 className="size-3.5" />
+            <Archive className="size-3.5" />
           </button>
         )}
 
