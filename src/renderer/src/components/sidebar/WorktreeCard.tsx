@@ -180,8 +180,10 @@ const WorktreeCard = React.memo(function WorktreeCard({
         <div className="flex items-center gap-2 pr-6 min-w-0">
           {cardProps.includes('status') && <StatusIndicator status={status} className="shrink-0" />}
           <div className="text-[14px] font-semibold text-foreground truncate leading-tight">
-            {/* FORK: use PR title if available, otherwise humanize branch name */}
-            {showPR && pr?.title ? pr.title : humanizeBranchName(worktree.branch)}
+            {/* FORK: use PR title if available, otherwise humanize branch name, fallback to displayName */}
+            {showPR && pr?.title
+              ? pr.title
+              : humanizeBranchName(worktree.branch) || worktree.displayName}
           </div>
         </div>
 
