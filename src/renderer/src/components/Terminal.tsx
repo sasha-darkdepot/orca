@@ -120,7 +120,8 @@ export default function Terminal(): React.JSX.Element | null {
   }
   const initialTabCreationGuardRef = useRef<string | null>(null)
 
-  // Auto-create first tab when worktree activates
+  // FORK: don't auto-create tabs — LaunchPanel handles initial tab creation
+  // when user clicks a tool button. Only clear the guard when tabs exist.
   useEffect(() => {
     if (!workspaceSessionReady) {
       return
@@ -134,17 +135,8 @@ export default function Terminal(): React.JSX.Element | null {
       if (initialTabCreationGuardRef.current === activeWorktreeId) {
         initialTabCreationGuardRef.current = null
       }
-      return
     }
-
-    // In React StrictMode (dev), mount effects are intentionally invoked twice.
-    // Track the worktree we already initialized so we only create one first tab.
-    if (initialTabCreationGuardRef.current === activeWorktreeId) {
-      return
-    }
-    initialTabCreationGuardRef.current = activeWorktreeId
-    createTab(activeWorktreeId)
-  }, [workspaceSessionReady, activeWorktreeId, tabs.length, createTab])
+  }, [workspaceSessionReady, activeWorktreeId, tabs.length])
 
   const totalTabs = tabs.length + worktreeFiles.length
 

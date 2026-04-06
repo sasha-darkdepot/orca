@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { DEFAULT_WORKTREE_CARD_PROPERTIES } from '../../shared/constants'
 
 import { Minimize2, PanelLeft, PanelRight } from 'lucide-react'
@@ -15,6 +15,7 @@ import Settings from './components/settings/Settings'
 import RightSidebar from './components/right-sidebar'
 import QuickOpen from './components/QuickOpen'
 import UpdateReminder from './components/UpdateReminder'
+import LaunchPanel from './components/LaunchPanel'
 import { useGitStatusPolling } from './components/right-sidebar/useGitStatusPolling'
 import {
   setRuntimeGraphStoreStateGetter,
@@ -50,6 +51,7 @@ function App(): React.JSX.Element {
   const activeWorktreeId = useAppStore((s) => s.activeWorktreeId)
   const activeRepoId = useAppStore((s) => s.activeRepoId)
   const tabsByWorktree = useAppStore((s) => s.tabsByWorktree)
+  const worktreesByRepo = useAppStore((s) => s.worktreesByRepo)
   const activeTabId = useAppStore((s) => s.activeTabId)
   const expandedPaneByTabId = useAppStore((s) => s.expandedPaneByTabId)
   const canExpandPaneByTabId = useAppStore((s) => s.canExpandPaneByTabId)
@@ -89,6 +91,21 @@ function App(): React.JSX.Element {
   useGlobalFileDrop()
 
   const settings = useAppStore((s) => s.settings)
+
+  // FORK: show LaunchPanel when a worktree is active but has no tabs yet
+  const showLaunchPanel = useMemo(() => {
+    if (
+      !activeWorktreeId ||
+      activeView !== 'terminal' ||
+      (tabsByWorktree[activeWorktreeId] ?? []).length > 0
+    ) {
+      return null
+    }
+    const wt = Object.values(worktreesByRepo)
+      .flat()
+      .find((w) => w.id === activeWorktreeId)
+    return wt ? { path: wt.path, name: wt.displayName } : null
+  }, [activeWorktreeId, activeView, tabsByWorktree, worktreesByRepo])
 
   // Fetch initial data + hydrate GitHub cache from disk
   useEffect(() => {
@@ -423,14 +440,23 @@ function App(): React.JSX.Element {
           <div className="flex flex-1 min-w-0 min-h-0 flex-col">
             <div
               className={
-                activeView === 'settings' || !activeWorktreeId
+                activeView === 'settings' || !activeWorktreeId || showLaunchPanel
                   ? 'hidden flex-1 min-w-0 min-h-0'
                   : 'flex flex-1 min-w-0 min-h-0'
               }
             >
               <Terminal />
             </div>
-            {activeView === 'settings' ? <Settings /> : !activeWorktreeId ? <Landing /> : null}
+            {activeView === 'settings' ? (
+              <Settings />
+            ) : !activeWorktreeId ? (
+              <Landing />
+            ) : showLaunchPanel ? (
+              <LaunchPanel
+                worktreePath={showLaunchPanel.path}
+                worktreeName={showLaunchPanel.name}
+              />
+            ) : null}
           </div>
         </div>
         {showSidebar && rightSidebarOpen ? <RightSidebar /> : null}
