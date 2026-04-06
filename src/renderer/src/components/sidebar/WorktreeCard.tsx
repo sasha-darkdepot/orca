@@ -232,12 +232,15 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </div>
         )}
 
-        {/* Conflict badge shown even without PR */}
-        {!(showPR && pr) && conflictOperation && conflictOperation !== 'unknown' && (
-          <div className="flex items-center gap-1 mt-1.5">
-            <span className="text-[13px] text-amber-500 dark:text-amber-400">
-              ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
-            </span>
+        {/* FORK: show branch name when no PR, so the card isn't empty */}
+        {!(showPR && pr) && (
+          <div className="flex items-center gap-1 mt-1 min-w-0">
+            {conflictOperation && conflictOperation !== 'unknown' && (
+              <span className="text-[13px] text-amber-500 dark:text-amber-400 shrink-0">
+                ⚠ {CONFLICT_OPERATION_LABELS[conflictOperation]}
+              </span>
+            )}
+            <span className="text-[13px] text-muted-foreground/40 truncate">{branch}</span>
           </div>
         )}
       </div>
