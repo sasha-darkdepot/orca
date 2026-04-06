@@ -1,0 +1,476 @@
+<h2>Section 4: Settings — Tools Configuration</h2>
+<p class="subtitle">Where users manage which tools appear in the Launch Panel</p>
+
+<div class="cards">
+  <!-- Option A: Compact rows -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #0a0a0a; border-radius: 8px; padding: 24px; min-height: 300px">
+        <!-- Settings header -->
+        <div style="font-size: 13px; font-weight: 600; color: #e5e5e5; margin-bottom: 4px">
+          Tools
+        </div>
+        <div style="font-size: 11px; color: #555; margin-bottom: 16px">
+          Configure which tools appear in the Launch Panel
+        </div>
+
+        <!-- Tool rows -->
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <!-- Claude -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 12px;
+              background: #141414;
+              border: 1px solid #2a2a2a;
+              border-radius: 8px;
+            "
+          >
+            <div
+              style="
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                background: #d97706;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 13px; color: #e5e5e5; font-weight: 500">Claude Code</div>
+              <div style="font-size: 11px; color: #555; font-family: monospace">claude</div>
+            </div>
+            <!-- Toggle on -->
+            <div
+              style="
+                width: 36px;
+                height: 20px;
+                background: #3b82f6;
+                border-radius: 10px;
+                position: relative;
+                cursor: pointer;
+                flex-shrink: 0;
+              "
+            >
+              <div
+                style="
+                  width: 16px;
+                  height: 16px;
+                  background: white;
+                  border-radius: 50%;
+                  position: absolute;
+                  top: 2px;
+                  right: 2px;
+                "
+              ></div>
+            </div>
+          </div>
+
+          <!-- Codex -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 12px;
+              background: #141414;
+              border: 1px solid #2a2a2a;
+              border-radius: 8px;
+            "
+          >
+            <div
+              style="
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                background: #22c55e;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 13px; color: #e5e5e5; font-weight: 500">Codex</div>
+              <div style="font-size: 11px; color: #555; font-family: monospace">codex</div>
+            </div>
+            <div
+              style="
+                width: 36px;
+                height: 20px;
+                background: #3b82f6;
+                border-radius: 10px;
+                position: relative;
+                cursor: pointer;
+                flex-shrink: 0;
+              "
+            >
+              <div
+                style="
+                  width: 16px;
+                  height: 16px;
+                  background: white;
+                  border-radius: 50%;
+                  position: absolute;
+                  top: 2px;
+                  right: 2px;
+                "
+              ></div>
+            </div>
+          </div>
+
+          <!-- OpenCode -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 12px;
+              background: #141414;
+              border: 1px solid #2a2a2a;
+              border-radius: 8px;
+            "
+          >
+            <div
+              style="
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                background: #3b82f6;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 13px; color: #e5e5e5; font-weight: 500">OpenCode</div>
+              <div style="font-size: 11px; color: #555; font-family: monospace">opencode</div>
+            </div>
+            <!-- Toggle off -->
+            <div
+              style="
+                width: 36px;
+                height: 20px;
+                background: #333;
+                border-radius: 10px;
+                position: relative;
+                cursor: pointer;
+                flex-shrink: 0;
+              "
+            >
+              <div
+                style="
+                  width: 16px;
+                  height: 16px;
+                  background: #666;
+                  border-radius: 50%;
+                  position: absolute;
+                  top: 2px;
+                  left: 2px;
+                "
+              ></div>
+            </div>
+          </div>
+
+          <!-- Add tool -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
+              padding: 10px;
+              border: 1px dashed #333;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <span style="font-size: 13px; color: #555">+ Add custom tool</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Compact Rows</h3>
+      <p>
+        Each tool is a row: icon, name, command, toggle. Inline — no modals. Edit by clicking.
+        Matches Orca's existing Settings style.
+      </p>
+    </div>
+  </div>
+
+  <!-- Option B: Expandable cards -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #0a0a0a; border-radius: 8px; padding: 24px; min-height: 300px">
+        <!-- Settings header -->
+        <div style="font-size: 13px; font-weight: 600; color: #e5e5e5; margin-bottom: 4px">
+          Tools
+        </div>
+        <div style="font-size: 11px; color: #555; margin-bottom: 16px">
+          Configure which tools appear in the Launch Panel
+        </div>
+
+        <!-- Tool: collapsed -->
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 12px;
+              background: #141414;
+              border: 1px solid #2a2a2a;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <div
+              style="
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                background: #d97706;
+                flex-shrink: 0;
+              "
+            ></div>
+            <span style="font-size: 13px; color: #e5e5e5; font-weight: 500; flex: 1"
+              >Claude Code</span
+            >
+            <span style="font-size: 11px; color: #555">▾</span>
+          </div>
+
+          <!-- Tool: expanded -->
+          <div
+            style="
+              background: #141414;
+              border: 1px solid #3b82f6;
+              border-radius: 8px;
+              overflow: hidden;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 12px;
+                cursor: pointer;
+                border-bottom: 1px solid #2a2a2a;
+              "
+            >
+              <div
+                style="
+                  width: 24px;
+                  height: 24px;
+                  border-radius: 5px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span style="font-size: 13px; color: #e5e5e5; font-weight: 500; flex: 1">Codex</span>
+              <span style="font-size: 11px; color: #555">▴</span>
+            </div>
+            <div style="padding: 12px; display: flex; flex-direction: column; gap: 10px">
+              <div>
+                <div
+                  style="
+                    font-size: 10px;
+                    color: #666;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  Display name
+                </div>
+                <div
+                  style="
+                    background: #0a0a0a;
+                    border: 1px solid #333;
+                    border-radius: 5px;
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    color: #ccc;
+                  "
+                >
+                  Codex
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-size: 10px;
+                    color: #666;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  Command
+                </div>
+                <div
+                  style="
+                    background: #0a0a0a;
+                    border: 1px solid #333;
+                    border-radius: 5px;
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    color: #ccc;
+                    font-family: monospace;
+                  "
+                >
+                  codex
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-size: 10px;
+                    color: #666;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  Color
+                </div>
+                <div style="display: flex; gap: 6px">
+                  <div
+                    style="
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 4px;
+                      background: #22c55e;
+                      border: 2px solid #fff;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 4px;
+                      background: #3b82f6;
+                      border: 1px solid #333;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 4px;
+                      background: #d97706;
+                      border: 1px solid #333;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 4px;
+                      background: #ef4444;
+                      border: 1px solid #333;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 20px;
+                      height: 20px;
+                      border-radius: 4px;
+                      background: #a855f7;
+                      border: 1px solid #333;
+                    "
+                  ></div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <span style="font-size: 12px; color: #aaa">Enabled</span>
+                  <div
+                    style="
+                      width: 36px;
+                      height: 20px;
+                      background: #3b82f6;
+                      border-radius: 10px;
+                      position: relative;
+                      cursor: pointer;
+                    "
+                  >
+                    <div
+                      style="
+                        width: 16px;
+                        height: 16px;
+                        background: white;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 2px;
+                        right: 2px;
+                      "
+                    ></div>
+                  </div>
+                </div>
+                <span style="font-size: 11px; color: #ef4444; cursor: pointer">Remove</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- OpenCode collapsed -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 12px;
+              background: #141414;
+              border: 1px solid #2a2a2a;
+              border-radius: 8px;
+              cursor: pointer;
+              opacity: 0.5;
+            "
+          >
+            <div
+              style="
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                background: #3b82f6;
+                flex-shrink: 0;
+              "
+            ></div>
+            <span style="font-size: 13px; color: #e5e5e5; font-weight: 500; flex: 1">OpenCode</span>
+            <span
+              style="
+                font-size: 10px;
+                color: #555;
+                background: #1a1a1a;
+                padding: 1px 6px;
+                border-radius: 3px;
+              "
+              >off</span
+            >
+            <span style="font-size: 11px; color: #555">▾</span>
+          </div>
+
+          <!-- Add tool -->
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 6px;
+              padding: 10px;
+              border: 1px dashed #333;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <span style="font-size: 13px; color: #555">+ Add custom tool</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Expandable Cards</h3>
+      <p>
+        Collapsed by default, click to expand full config: name, command, color picker, toggle,
+        remove. More room for customization, but heavier UI.
+      </p>
+    </div>
+  </div>
+</div>

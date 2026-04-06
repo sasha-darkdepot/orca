@@ -1,0 +1,512 @@
+<h2>Section 3: Landing Page (no worktree selected)</h2>
+<p class="subtitle">Global session hub — all sessions across all worktrees. Pick a layout.</p>
+
+<div class="cards">
+  <!-- Option A: Session-first list -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 24px;
+          min-height: 320px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <!-- Logo + title -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px">
+          <div
+            style="
+              width: 32px;
+              height: 32px;
+              border-radius: 8px;
+              background: #12181e;
+              border: 1px solid #333;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 18px">🐋</span>
+          </div>
+          <span style="font-size: 20px; font-weight: 700; color: #e5e5e5; letter-spacing: 1px"
+            >ORCA</span
+          >
+        </div>
+        <div style="font-size: 12px; color: #555; margin-bottom: 20px">
+          Select a worktree or resume a session
+        </div>
+
+        <!-- All recent sessions -->
+        <div style="width: 100%; max-width: 400px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Recent sessions
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                border-radius: 6px;
+                background: #141414;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator bug</span
+              >
+              <span
+                style="
+                  font-size: 11px;
+                  color: #666;
+                  flex-shrink: 0;
+                  background: #1a1a1a;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >ui-polish-1</span
+              >
+              <span style="font-size: 11px; color: #555">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >implement auth middleware</span
+              >
+              <span
+                style="
+                  font-size: 11px;
+                  color: #666;
+                  flex-shrink: 0;
+                  background: #1a1a1a;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >feature/auth</span
+              >
+              <span style="font-size: 11px; color: #555">4h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor database queries</span
+              >
+              <span
+                style="
+                  font-size: 11px;
+                  color: #666;
+                  flex-shrink: 0;
+                  background: #1a1a1a;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >main</span
+              >
+              <span style="font-size: 11px; color: #555">1d</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #3b82f6;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >debug flaky CI tests</span
+              >
+              <span
+                style="
+                  font-size: 11px;
+                  color: #666;
+                  flex-shrink: 0;
+                  background: #1a1a1a;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >fix/ci</span
+              >
+              <span style="font-size: 11px; color: #555">2d</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom actions -->
+        <div style="display: flex; gap: 8px; margin-top: 20px">
+          <div
+            style="
+              font-size: 12px;
+              color: #666;
+              border: 1px solid #333;
+              padding: 6px 14px;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            + Add Repo
+          </div>
+          <div
+            style="
+              font-size: 12px;
+              color: #666;
+              border: 1px solid #333;
+              padding: 6px 14px;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            + Create Worktree
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Session-first</h3>
+      <p>
+        Sessions are the hero. Flat list sorted by recency, worktree shown as a badge. Click a
+        session → jumps to that worktree and resumes. "Where was I?" answered instantly.
+      </p>
+    </div>
+  </div>
+
+  <!-- Option B: Grouped by worktree -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 24px;
+          min-height: 320px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <!-- Logo + title -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px">
+          <div
+            style="
+              width: 32px;
+              height: 32px;
+              border-radius: 8px;
+              background: #12181e;
+              border: 1px solid #333;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 18px">🐋</span>
+          </div>
+          <span style="font-size: 20px; font-weight: 700; color: #e5e5e5; letter-spacing: 1px"
+            >ORCA</span
+          >
+        </div>
+        <div style="font-size: 12px; color: #555; margin-bottom: 20px">
+          Pick up where you left off
+        </div>
+
+        <!-- Grouped by worktree -->
+        <div style="width: 100%; max-width: 400px">
+          <!-- Worktree 1 -->
+          <div style="margin-bottom: 14px">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px">
+              <span style="color: #f59e0b; font-size: 13px">📁</span>
+              <span style="font-size: 12px; font-weight: 600; color: #aaa">ui-polish-1</span>
+              <span style="font-size: 10px; color: #555">orca</span>
+            </div>
+            <div style="padding-left: 22px; display: flex; flex-direction: column; gap: 2px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 6px 8px;
+                  border-radius: 5px;
+                  background: #141414;
+                  cursor: pointer;
+                "
+              >
+                <div
+                  style="
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 3px;
+                    background: #d97706;
+                    flex-shrink: 0;
+                  "
+                ></div>
+                <span
+                  style="
+                    font-size: 12px;
+                    color: #ccc;
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                  >fix sidebar status indicator</span
+                >
+                <span style="font-size: 10px; color: #555">2h</span>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 6px 8px;
+                  border-radius: 5px;
+                  cursor: pointer;
+                "
+              >
+                <div
+                  style="
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 3px;
+                    background: #22c55e;
+                    flex-shrink: 0;
+                  "
+                ></div>
+                <span
+                  style="
+                    font-size: 12px;
+                    color: #ccc;
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                  >refactor WorktreeCard</span
+                >
+                <span style="font-size: 10px; color: #555">5h</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Worktree 2 -->
+          <div style="margin-bottom: 14px">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px">
+              <span style="color: #3b82f6; font-size: 13px">📁</span>
+              <span style="font-size: 12px; font-weight: 600; color: #aaa">feature/auth</span>
+              <span style="font-size: 10px; color: #555">zeni</span>
+            </div>
+            <div style="padding-left: 22px; display: flex; flex-direction: column; gap: 2px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 6px 8px;
+                  border-radius: 5px;
+                  background: #141414;
+                  cursor: pointer;
+                "
+              >
+                <div
+                  style="
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 3px;
+                    background: #d97706;
+                    flex-shrink: 0;
+                  "
+                ></div>
+                <span
+                  style="
+                    font-size: 12px;
+                    color: #ccc;
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                  >implement auth middleware</span
+                >
+                <span style="font-size: 10px; color: #555">4h</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Worktree 3 -->
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px">
+              <span style="color: #22c55e; font-size: 13px">📁</span>
+              <span style="font-size: 12px; font-weight: 600; color: #aaa">main</span>
+              <span style="font-size: 10px; color: #555">zeni</span>
+            </div>
+            <div style="padding-left: 22px; display: flex; flex-direction: column; gap: 2px">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 6px 8px;
+                  border-radius: 5px;
+                  cursor: pointer;
+                "
+              >
+                <div
+                  style="
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 3px;
+                    background: #d97706;
+                    flex-shrink: 0;
+                  "
+                ></div>
+                <span
+                  style="
+                    font-size: 12px;
+                    color: #ccc;
+                    flex: 1;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                  >refactor database queries</span
+                >
+                <span style="font-size: 10px; color: #555">1d</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom actions -->
+        <div style="display: flex; gap: 8px; margin-top: 20px">
+          <div
+            style="
+              font-size: 12px;
+              color: #666;
+              border: 1px solid #333;
+              padding: 6px 14px;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            + Add Repo
+          </div>
+          <div
+            style="
+              font-size: 12px;
+              color: #666;
+              border: 1px solid #333;
+              padding: 6px 14px;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            + Create Worktree
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Grouped by worktree</h3>
+      <p>
+        Sessions nested under worktree headers with repo context. Click session → resume in that
+        worktree. Better spatial model — "this worktree had these conversations".
+      </p>
+    </div>
+  </div>
+</div>

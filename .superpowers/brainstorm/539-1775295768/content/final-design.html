@@ -1,0 +1,295 @@
+<h2>Финальный дизайн сайдбара</h2>
+<p class="subtitle">Всё вместе — подтверди что это то, что хочешь</p>
+
+<div class="mockup" style="margin-bottom: 40px">
+  <div class="mockup-header">New Orca Sidebar</div>
+  <div
+    class="mockup-body"
+    style="
+      background: #141414;
+      color: #e5e5e5;
+      font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+      padding: 0;
+      min-height: 560px;
+      position: relative;
+    "
+  >
+    <!-- Header: clean, just label + icons -->
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 14px;
+      "
+    >
+      <span
+        style="
+          font-size: 11px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: #666;
+        "
+        >Worktrees</span
+      >
+      <div style="display: flex; gap: 8px; color: #555">
+        <span style="cursor: pointer; font-size: 13px">&#9776;</span>
+        <span style="cursor: pointer; font-size: 16px">+</span>
+      </div>
+    </div>
+
+    <!-- Row 1: Active, has PR (open), CI passing -->
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        margin: 0 8px 4px;
+        padding: 12px 14px;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 6px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #f0f0f0">ui-polish-1</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <svg
+          viewBox="0 0 16 16"
+          fill="#22c55e"
+          style="width: 13px; height: 13px; flex-shrink: 0; opacity: 0.8"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.25 2.25 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1.5 1.5 0 011.5 1.5v5.628a2.25 2.25 0 101.5 0V5.5A3 3 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"
+          />
+        </svg>
+        <span style="font-size: 12px; color: #bbb; font-weight: 500">#42</span>
+        <span
+          style="
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+          "
+          >Polish sidebar UI</span
+        >
+        <svg
+          viewBox="0 0 24 24"
+          style="width: 14px; height: 14px; flex-shrink: 0"
+          fill="none"
+          stroke="#22c55e"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Row 2: Inactive, has PR (merged) -->
+    <div style="margin: 0 8px 4px; padding: 12px 14px; border-radius: 8px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 6px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">feat-auth</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <svg
+          viewBox="0 0 16 16"
+          fill="#a78bfa"
+          style="width: 13px; height: 13px; flex-shrink: 0; opacity: 0.8"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.25 2.25 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1.5 1.5 0 011.5 1.5v5.628a2.25 2.25 0 101.5 0V5.5A3 3 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"
+          />
+        </svg>
+        <span style="font-size: 12px; color: #bbb; font-weight: 500">#18</span>
+        <span
+          style="
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          "
+          >Add OAuth2 login flow</span
+        >
+      </div>
+    </div>
+
+    <!-- Row 3: Inactive, NO PR — single line -->
+    <div style="margin: 0 8px 4px; padding: 12px 14px; border-radius: 8px">
+      <div style="display: flex; align-items: center">
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">fix-terminal-resize</span>
+      </div>
+    </div>
+
+    <!-- Row 4: Inactive, has PR + rebasing warning -->
+    <div style="margin: 0 8px 4px; padding: 12px 14px; border-radius: 8px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 6px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">transfer-refactor</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <svg
+          viewBox="0 0 16 16"
+          fill="#22c55e"
+          style="width: 13px; height: 13px; flex-shrink: 0; opacity: 0.8"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.25 2.25 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1.5 1.5 0 011.5 1.5v5.628a2.25 2.25 0 101.5 0V5.5A3 3 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"
+          />
+        </svg>
+        <span style="font-size: 12px; color: #bbb; font-weight: 500">#55</span>
+        <span
+          style="
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+          "
+          >Refactor transfer logic</span
+        >
+        <span style="font-size: 11px; color: #f59e0b; flex-shrink: 0">&#9888; Rebasing</span>
+      </div>
+    </div>
+
+    <!-- Row 5: main branch, no PR -->
+    <div style="margin: 0 8px 4px; padding: 12px 14px; border-radius: 8px">
+      <div style="display: flex; align-items: center">
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">main</span>
+      </div>
+    </div>
+
+    <!-- Row 6: Inactive, has PR, CI failing -->
+    <div style="margin: 0 8px 4px; padding: 12px 14px; border-radius: 8px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 6px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">feat-notifications</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <svg
+          viewBox="0 0 16 16"
+          fill="#22c55e"
+          style="width: 13px; height: 13px; flex-shrink: 0; opacity: 0.8"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.25 2.25 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1.5 1.5 0 011.5 1.5v5.628a2.25 2.25 0 101.5 0V5.5A3 3 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z"
+          />
+        </svg>
+        <span style="font-size: 12px; color: #bbb; font-weight: 500">#71</span>
+        <span
+          style="
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+          "
+          >Push notification system</span
+        >
+        <svg
+          viewBox="0 0 24 24"
+          style="width: 14px; height: 14px; flex-shrink: 0"
+          fill="none"
+          stroke="#f87171"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="m15 9-6 6M9 9l6 6" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Bottom toolbar -->
+    <div
+      style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 16px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      "
+    >
+      <span style="color: #555; font-size: 14px; cursor: pointer">?</span>
+      <span style="color: #555; font-size: 14px; cursor: pointer">&#9881;</span>
+    </div>
+  </div>
+</div>
+
+<h3>Сводка изменений</h3>
+<div class="section">
+  <ul style="line-height: 1.8">
+    <li>
+      <strong>Плоские ряды</strong> — без бордеров и карточных фонов. Активный = subtle highlight.
+    </li>
+    <li><strong>Строка 1:</strong> имя worktree (14px, semibold)</li>
+    <li>
+      <strong>Строка 2 (если есть PR):</strong> PR-иконка (цвет по статусу) + #номер + title + CI
+      иконка справа
+    </li>
+    <li><strong>Нет PR:</strong> однострочный ряд, только имя</li>
+    <li><strong>Без diff stats</strong></li>
+    <li>
+      <strong>Поиск и группировка</strong> — убраны из постоянного UI (доступны через view options)
+    </li>
+    <li><strong>Нижний тулбар</strong> — только иконки (? и &#9881;)</li>
+    <li><strong>Шрифт крупнее</strong> — 14px имя, 12px мета</li>
+    <li><strong>Больше padding</strong> — 12px вертикально на ряд</li>
+  </ul>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="approve" onclick="toggleSelect(this)">
+    <div class="letter">&#10003;</div>
+    <div class="content">
+      <h3>Выглядит хорошо, делаем</h3>
+      <p>Переходим к написанию спеки и плана реализации</p>
+    </div>
+  </div>
+  <div class="option" data-choice="tweak" onclick="toggleSelect(this)">
+    <div class="letter">&#9998;</div>
+    <div class="content">
+      <h3>Почти, но есть правки</h3>
+      <p>Напиши в терминале что поменять</p>
+    </div>
+  </div>
+</div>

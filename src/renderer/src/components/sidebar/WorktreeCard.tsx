@@ -2,12 +2,23 @@
 // Only shows worktree name + PR info (if exists). Status, unread, repo badge,
 // branch, issue, and comment are hidden by default (still toggleable in view options).
 /* eslint-disable max-lines */
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store'
 import { Archive, CircleCheck, CircleX, LoaderCircle } from 'lucide-react'
+import StatusIndicator from './StatusIndicator'
 import WorktreeContextMenu from './WorktreeContextMenu'
 import { cn } from '@/lib/utils'
-import type { Worktree, Repo, PRInfo, GitConflictOperation } from '../../../../shared/types'
+import { detectAgentStatusFromTitle } from '@/lib/agent-status'
+import type {
+  Worktree,
+  Repo,
+  PRInfo,
+  GitConflictOperation,
+  TerminalTab
+} from '../../../../shared/types'
+import type { Status } from './StatusIndicator'
+
+const EMPTY_TABS: TerminalTab[] = []
 
 function branchDisplayName(branch: string): string {
   return branch.replace(/^refs\/heads\//, '')
@@ -50,6 +61,24 @@ const WorktreeCard = React.memo(function WorktreeCard({
   const updateWorktreeMeta = useAppStore((s) => s.updateWorktreeMeta)
   const deleteState = useAppStore((s) => s.deleteStateByWorktreeId[worktree.id])
   const conflictOperation = useAppStore((s) => s.gitConflictOperationByWorktree[worktree.id])
+  const tabs = useAppStore((s) => s.tabsByWorktree[worktree.id] ?? EMPTY_TABS)
+
+  const hasTerminals = tabs.length > 0
+
+  // FORK: derive process status for the left-side indicator dot
+  const status: Status = useMemo(() => {
+    if (!hasTerminals) {
+      return 'inactive'
+    }
+    const liveTabs = tabs.filter((tab) => tab.ptyId)
+    if (liveTabs.some((tab) => detectAgentStatusFromTitle(tab.title) === 'permission')) {
+      return 'permission'
+    }
+    if (liveTabs.some((tab) => detectAgentStatusFromTitle(tab.title) === 'working')) {
+      return 'working'
+    }
+    return liveTabs.length > 0 ? 'active' : 'inactive'
+  }, [hasTerminals, tabs])
 
   const branch = branchDisplayName(worktree.branch)
   const prCacheKey = repo && branch ? `${repo.path}::${branch}` : ''
@@ -146,9 +175,12 @@ const WorktreeCard = React.memo(function WorktreeCard({
           </button>
         )}
 
-        {/* Line 1: Worktree name */}
-        <div className="text-[14px] font-semibold text-foreground truncate leading-tight pr-6">
-          {worktree.displayName}
+        {/* Line 1: Status dot + Worktree name */}
+        <div className="flex items-center gap-2 pr-6 min-w-0">
+          {cardProps.includes('status') && <StatusIndicator status={status} className="shrink-0" />}
+          <div className="text-[14px] font-semibold text-foreground truncate leading-tight">
+            {worktree.displayName}
+          </div>
         </div>
 
         {/* Line 2: PR info (only if PR exists and pr card property is enabled) */}

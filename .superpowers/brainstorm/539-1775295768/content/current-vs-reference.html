@@ -1,0 +1,460 @@
+<h2>What to adopt from the reference?</h2>
+<p class="subtitle">
+  Current Orca sidebar vs the reference you shared. Which traits do you want to bring over?
+</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Current Orca Sidebar</div>
+    <div
+      class="mockup-body"
+      style="
+        background: #171717;
+        color: #e5e5e5;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        padding: 0;
+        min-height: 500px;
+      "
+    >
+      <!-- Header -->
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px 4px;
+        "
+      >
+        <span
+          style="
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+          "
+          >Worktrees</span
+        >
+        <div style="display: flex; gap: 4px">
+          <span style="color: #888; font-size: 12px; cursor: pointer">&#9776;</span>
+          <span style="color: #888; font-size: 14px; cursor: pointer">+</span>
+        </div>
+      </div>
+      <!-- Search -->
+      <div style="padding: 4px 8px 12px">
+        <div
+          style="
+            background: #262626;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 11px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          "
+        >
+          <span>&#128269;</span> Search...
+          <span style="margin-left: auto; font-size: 10px; color: #555">All</span>
+        </div>
+      </div>
+      <!-- Group controls -->
+      <div style="padding: 0 8px 6px; display: flex; gap: 4px">
+        <span
+          style="
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ccc;
+          "
+          >All</span
+        >
+        <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; color: #666"
+          >PR Status</span
+        >
+        <span style="font-size: 10px; padding: 2px 8px; border-radius: 4px; color: #666">Repo</span>
+      </div>
+      <!-- Cards -->
+      <div style="padding: 4px">
+        <!-- Active card -->
+        <div
+          style="
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 4px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 6px">
+            <div style="width: 6px; height: 6px; border-radius: 50%; background: #22c55e"></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span
+                  style="
+                    font-size: 12px;
+                    font-weight: 600;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                  >ui-polish-1</span
+                >
+                <span style="color: #22c55e; font-size: 11px">&#10003;</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px">
+                <span
+                  style="
+                    font-size: 10px;
+                    padding: 1px 6px;
+                    border-radius: 3px;
+                    background: #333;
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    color: #aaa;
+                  "
+                  >orca</span
+                >
+                <span style="font-size: 11px; color: #888">sasha/ui-polish-1</span>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 4px;
+                  margin-top: 4px;
+                  font-size: 11px;
+                  color: #888;
+                "
+              >
+                <span style="color: #a78bfa">&#9741;</span>
+                <span style="color: #aaa; font-weight: 500">#42</span>
+                <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis"
+                  >Polish sidebar UI</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Inactive card -->
+        <div
+          style="
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 4px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 6px">
+            <div
+              style="width: 6px; height: 6px; border-radius: 50%; background: #888; opacity: 0.4"
+            ></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 12px; font-weight: 600">feat-auth</div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px">
+                <span
+                  style="
+                    font-size: 10px;
+                    padding: 1px 6px;
+                    border-radius: 3px;
+                    background: #333;
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    color: #aaa;
+                  "
+                  >orca</span
+                >
+                <span style="font-size: 11px; color: #888">sasha/feat-auth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Another card -->
+        <div
+          style="
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 4px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 6px">
+            <div
+              style="width: 6px; height: 6px; border-radius: 50%; background: #eab308; opacity: 0.6"
+            ></div>
+            <div style="flex: 1; min-width: 0">
+              <div style="font-size: 12px; font-weight: 600">fix-terminal-resize</div>
+              <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px">
+                <span
+                  style="
+                    font-size: 10px;
+                    padding: 1px 6px;
+                    border-radius: 3px;
+                    background: #333;
+                    border: 1px solid rgba(255, 255, 255, 0.07);
+                    color: #aaa;
+                  "
+                  >orca</span
+                >
+                <span style="font-size: 11px; color: #888">sasha/fix-resize</span>
+              </div>
+              <div style="font-size: 11px; color: #888; margin-top: 3px">
+                <span style="color: #f59e0b">&#9888;</span> Rebasing
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom toolbar -->
+      <div
+        style="
+          margin-top: auto;
+          border-top: 1px solid rgba(255, 255, 255, 0.07);
+          padding: 6px 8px;
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        "
+      >
+        <span style="font-size: 11px; color: #888; display: flex; align-items: center; gap: 4px"
+          >&#128193; Add Repo</span
+        >
+        <span style="color: #888">&#9881;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Reference Style (Kodu-like)</div>
+    <div
+      class="mockup-body"
+      style="
+        background: #1a1a1a;
+        color: #d4d4d4;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        padding: 0;
+        min-height: 500px;
+      "
+    >
+      <!-- Header -->
+      <div style="display: flex; align-items: center; gap: 8px; padding: 16px 16px 12px">
+        <span style="color: #888; font-size: 14px">&#9201;</span>
+        <span style="font-size: 14px; color: #d4d4d4">History</span>
+      </div>
+      <!-- Workspaces header -->
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 8px 16px;
+        "
+      >
+        <span style="font-size: 13px; color: #888">Workspaces</span>
+        <div style="display: flex; gap: 8px">
+          <span style="color: #666">&#9776;</span>
+          <span style="color: #666">&#43;</span>
+        </div>
+      </div>
+      <!-- Repo group -->
+      <div style="display: flex; align-items: center; gap: 8px; padding: 8px 16px">
+        <span style="color: #888">&#128193;</span>
+        <span style="font-size: 14px; color: #d4d4d4">zeni</span>
+      </div>
+      <!-- Flat list -->
+      <div style="padding: 4px 0">
+        <div style="display: flex; align-items: center; padding: 10px 16px 10px 24px; gap: 10px">
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >feat(subscri...</span
+          >
+          <span style="font-size: 12px; color: #888; white-space: nowrap">+846 -197</span>
+        </div>
+        <!-- Active -->
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            padding: 10px 16px 10px 24px;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            margin: 0 4px;
+          "
+        >
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >feat(chat): fl...</span
+          >
+          <span style="white-space: nowrap"
+            ><span style="color: #4ade80; font-size: 12px">+184</span>
+            <span style="color: #f87171; font-size: 12px">-17</span></span
+          >
+        </div>
+        <div style="display: flex; align-items: center; padding: 10px 16px 10px 24px; gap: 10px">
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >fix(chat): re...</span
+          >
+          <span style="font-size: 12px; color: #888; white-space: nowrap">+237 -582</span>
+        </div>
+        <div style="display: flex; align-items: center; padding: 10px 16px 10px 24px; gap: 10px">
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >feat(ci): relea...</span
+          >
+          <span style="font-size: 12px; color: #888; white-space: nowrap">+103 -50</span>
+        </div>
+        <div style="display: flex; align-items: center; padding: 10px 16px 10px 24px; gap: 10px">
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >feat(chat): ...</span
+          >
+          <span style="font-size: 12px; color: #888; white-space: nowrap">+1.5k -228</span>
+        </div>
+        <div style="display: flex; align-items: center; padding: 10px 16px 10px 24px; gap: 10px">
+          <span style="color: #a78bfa; font-size: 16px">&#9741;</span>
+          <span
+            style="
+              font-size: 13px;
+              color: #d4d4d4;
+              flex: 1;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            "
+            >feat(chat): sh...</span
+          >
+          <span style="font-size: 12px; color: #888; white-space: nowrap">+58 -13</span>
+        </div>
+      </div>
+      <!-- Bottom -->
+      <div
+        style="
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 10px 16px;
+          display: flex;
+          justify-content: flex-end;
+          gap: 16px;
+        "
+      >
+        <span style="color: #666; font-size: 14px">?</span>
+        <span style="color: #666; font-size: 14px">&#9881;</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top: 32px">Key differences</h3>
+<p class="subtitle">Click ALL traits you want to adopt from the reference</p>
+
+<div class="options" data-multiselect>
+  <div class="option" data-choice="flat-rows" onclick="toggleSelect(this)">
+    <div class="letter">1</div>
+    <div class="content">
+      <h3>Flat rows instead of cards</h3>
+      <p>
+        No borders, no card background — just simple rows with generous padding. Active item gets a
+        very subtle highlight.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="hide-chrome" onclick="toggleSelect(this)">
+    <div class="letter">2</div>
+    <div class="content">
+      <h3>Hide search & group controls by default</h3>
+      <p>
+        Remove the always-visible search bar and All/PR Status/Repo toggle. Show them on demand
+        (e.g. ⌘K or a filter icon).
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="diff-stats" onclick="toggleSelect(this)">
+    <div class="letter">3</div>
+    <div class="content">
+      <h3>Diff stats (+/- lines) on each row</h3>
+      <p>
+        Show lines added/removed right on the row instead of (or alongside) PR/CI metadata.
+        Green/red coloring for active item.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="bigger-text" onclick="toggleSelect(this)">
+    <div class="letter">4</div>
+    <div class="content">
+      <h3>Bigger text, more whitespace</h3>
+      <p>
+        Bump font sizes from 10-12px to 13-14px. More vertical padding between items. Less visual
+        density overall.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="single-line" onclick="toggleSelect(this)">
+    <div class="letter">5</div>
+    <div class="content">
+      <h3>Single-line items (name only)</h3>
+      <p>
+        Show just the worktree name on each row — hide branch, repo badge, PR, issue, comment by
+        default. Reveal on hover or expand.
+      </p>
+    </div>
+  </div>
+  <div class="option" data-choice="minimal-bottom" onclick="toggleSelect(this)">
+    <div class="letter">6</div>
+    <div class="content">
+      <h3>Minimal bottom toolbar</h3>
+      <p>Just icons (help + settings), no "Add Repo" text button. Cleaner, more subtle.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,559 @@
+<h2>Section 3: Landing Page (revised)</h2>
+<p class="subtitle">Priority: 1) New work in existing repo → 2) New project → 3) Recent activity</p>
+
+<div class="cards">
+  <!-- Option A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 28px 24px;
+          min-height: 360px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <!-- Logo -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px">
+          <div
+            style="
+              width: 28px;
+              height: 28px;
+              border-radius: 7px;
+              background: #12181e;
+              border: 1px solid #333;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 15px">🐋</span>
+          </div>
+          <span style="font-size: 18px; font-weight: 700; color: #e5e5e5; letter-spacing: 1px"
+            >ORCA</span
+          >
+        </div>
+
+        <!-- PRIMARY: Create worktree in existing repo -->
+        <div style="width: 100%; max-width: 380px; margin-bottom: 20px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #666;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Start new work
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 14px;
+                background: #141414;
+                border: 1px solid #2a2a2a;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              <span style="color: #f59e0b; font-size: 14px">📁</span>
+              <div style="flex: 1">
+                <div style="font-size: 13px; font-weight: 600; color: #e5e5e5">orca</div>
+                <div style="font-size: 11px; color: #555">4 worktrees</div>
+              </div>
+              <div
+                style="
+                  font-size: 12px;
+                  color: #3b82f6;
+                  background: #1e293b;
+                  padding: 4px 10px;
+                  border-radius: 5px;
+                "
+              >
+                + New branch
+              </div>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 14px;
+                background: #141414;
+                border: 1px solid #2a2a2a;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              <span style="color: #3b82f6; font-size: 14px">📁</span>
+              <div style="flex: 1">
+                <div style="font-size: 13px; font-weight: 600; color: #e5e5e5">zeni</div>
+                <div style="font-size: 11px; color: #555">2 worktrees</div>
+              </div>
+              <div
+                style="
+                  font-size: 12px;
+                  color: #3b82f6;
+                  background: #1e293b;
+                  padding: 4px 10px;
+                  border-radius: 5px;
+                "
+              >
+                + New branch
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECONDARY: Add new repo -->
+        <div style="width: 100%; max-width: 380px; margin-bottom: 20px">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 10px 14px;
+              border: 1px dashed #333;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            <span style="font-size: 14px; color: #555">+</span>
+            <span style="font-size: 13px; color: #777">Add new repository</span>
+          </div>
+        </div>
+
+        <!-- TERTIARY: Recent activity -->
+        <div style="width: 100%; max-width: 380px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Recent activity
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >ui-polish-1</span
+              >
+              <span style="font-size: 10px; color: #444">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >implement auth middleware</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >feature/auth</span
+              >
+              <span style="font-size: 10px; color: #444">4h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor database queries</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >main</span
+              >
+              <span style="font-size: 10px; color: #444">1d</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Action-first</h3>
+      <p>
+        Repos with "+ New branch" as primary action. Add repo below. Activity is compact and
+        de-emphasized at bottom — present but not competing for attention.
+      </p>
+    </div>
+  </div>
+
+  <!-- Option B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 28px 24px;
+          min-height: 360px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        "
+      >
+        <!-- Logo -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px">
+          <div
+            style="
+              width: 28px;
+              height: 28px;
+              border-radius: 7px;
+              background: #12181e;
+              border: 1px solid #333;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <span style="font-size: 15px">🐋</span>
+          </div>
+          <span style="font-size: 18px; font-weight: 700; color: #e5e5e5; letter-spacing: 1px"
+            >ORCA</span
+          >
+        </div>
+
+        <!-- BIG CTA -->
+        <div style="width: 100%; max-width: 380px; margin-bottom: 16px">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              padding: 14px;
+              background: linear-gradient(135deg, #1e293b, #172033);
+              border: 1px solid #334155;
+              border-radius: 10px;
+              cursor: pointer;
+            "
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#60a5fa"
+              stroke-width="2"
+            >
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            <span style="font-size: 14px; font-weight: 600; color: #93c5fd">Create worktree</span>
+          </div>
+        </div>
+
+        <!-- Repo quick picks -->
+        <div style="width: 100%; max-width: 380px; margin-bottom: 20px">
+          <div style="display: flex; gap: 6px">
+            <div
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 12px;
+                background: #141414;
+                border: 1px solid #2a2a2a;
+                border-radius: 7px;
+                cursor: pointer;
+              "
+            >
+              <span style="color: #f59e0b; font-size: 12px">📁</span>
+              <span style="font-size: 12px; color: #ccc">orca</span>
+            </div>
+            <div
+              style="
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 12px;
+                background: #141414;
+                border: 1px solid #2a2a2a;
+                border-radius: 7px;
+                cursor: pointer;
+              "
+            >
+              <span style="color: #3b82f6; font-size: 12px">📁</span>
+              <span style="font-size: 12px; color: #ccc">zeni</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 12px;
+                border: 1px dashed #333;
+                border-radius: 7px;
+                cursor: pointer;
+              "
+            >
+              <span style="font-size: 12px; color: #555">+ Repo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div
+          style="width: 100%; max-width: 380px; border-top: 1px solid #1a1a1a; margin-bottom: 16px"
+        ></div>
+
+        <!-- Recent activity -->
+        <div style="width: 100%; max-width: 380px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Resume
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >ui-polish-1</span
+              >
+              <span style="font-size: 10px; color: #444">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >implement auth middleware</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >feature/auth</span
+              >
+              <span style="font-size: 10px; color: #444">4h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 10px;
+                border-radius: 5px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 12px;
+                  height: 12px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #999;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor database queries</span
+              >
+              <span
+                style="
+                  font-size: 10px;
+                  color: #444;
+                  background: #1a1a1a;
+                  padding: 1px 5px;
+                  border-radius: 3px;
+                "
+                >main</span
+              >
+              <span style="font-size: 10px; color: #444">1d</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — CTA-first</h3>
+      <p>
+        Big "Create worktree" button front and center. Repos as quick-pick chips below. Sessions
+        under a divider as "Resume". Strong action hierarchy — the primary flow is unmissable.
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,434 @@
+<h2>Row layout with metadata</h2>
+<p class="subtitle">Three варианта — каждый показан отдельно. Выбери один.</p>
+
+<!-- ====== OPTION A ====== -->
+<div class="option" data-choice="two-line" onclick="toggleSelect(this)" style="margin-bottom: 32px">
+  <div class="letter">A</div>
+  <div class="content">
+    <h3>Two-line compact</h3>
+    <p>Line 1: name + diff stats. Line 2: repo badge + branch + status.</p>
+  </div>
+</div>
+
+<div class="mockup" style="margin-bottom: 48px">
+  <div class="mockup-header">A: Two-line compact</div>
+  <div
+    class="mockup-body"
+    style="
+      background: #141414;
+      color: #e5e5e5;
+      font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+      padding: 20px 0;
+      min-height: 320px;
+    "
+  >
+    <!-- Active row -->
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        margin: 0 12px 8px;
+        padding: 14px 16px;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #f0f0f0">ui-polish-1</span>
+        <span style="white-space: nowrap"
+          ><span style="color: #4ade80; font-size: 13px; font-weight: 500">+184</span
+          >&nbsp;&nbsp;<span style="color: #f87171; font-size: 13px; font-weight: 500"
+            >-17</span
+          ></span
+        >
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <span
+          style="
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #999;
+          "
+          >orca</span
+        >
+        <span style="font-size: 12px; color: #666">sasha/ui-polish-1</span>
+        <span style="color: #22c55e; font-size: 12px; margin-left: auto">&#10003;</span>
+      </div>
+    </div>
+
+    <!-- Inactive row -->
+    <div style="margin: 0 12px 8px; padding: 14px 16px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">feat-auth</span>
+        <span style="font-size: 13px; color: #555">+846 -197</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <span
+          style="
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #999;
+          "
+          >orca</span
+        >
+        <span style="font-size: 12px; color: #666">sasha/feat-auth</span>
+      </div>
+    </div>
+
+    <!-- Another row -->
+    <div style="margin: 0 12px; padding: 14px 16px">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">fix-terminal-resize</span>
+        <span style="font-size: 13px; color: #555">+58 -13</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <span
+          style="
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #2a2a2a;
+            color: #999;
+          "
+          >orca</span
+        >
+        <span style="font-size: 12px; color: #666">sasha/fix-resize</span>
+        <span style="color: #f59e0b; font-size: 12px; margin-left: auto">&#9888; Rebasing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPTION B ====== -->
+<div
+  class="option"
+  data-choice="single-expand"
+  onclick="toggleSelect(this)"
+  style="margin-bottom: 32px"
+>
+  <div class="letter">B</div>
+  <div class="content">
+    <h3>Single-line + expand active</h3>
+    <p>Inactive = name + diff only. Active item expands to show branch, PR, CI.</p>
+  </div>
+</div>
+
+<div class="mockup" style="margin-bottom: 48px">
+  <div class="mockup-header">B: Single-line + expand active</div>
+  <div
+    class="mockup-body"
+    style="
+      background: #141414;
+      color: #e5e5e5;
+      font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+      padding: 20px 0;
+      min-height: 320px;
+    "
+  >
+    <!-- Active row (expanded) -->
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        margin: 0 12px 8px;
+        padding: 14px 16px;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        "
+      >
+        <span style="font-size: 14px; font-weight: 600; color: #f0f0f0">ui-polish-1</span>
+        <span style="white-space: nowrap"
+          ><span style="color: #4ade80; font-size: 13px; font-weight: 500">+184</span
+          >&nbsp;&nbsp;<span style="color: #f87171; font-size: 13px; font-weight: 500"
+            >-17</span
+          ></span
+        >
+      </div>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 10px">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px">
+          <span
+            style="
+              font-size: 11px;
+              padding: 2px 8px;
+              border-radius: 4px;
+              background: #2a2a2a;
+              color: #999;
+            "
+            >orca</span
+          >
+          <span style="font-size: 12px; color: #666">sasha/ui-polish-1</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 12px">
+          <span style="color: #a78bfa">&#9741;</span>
+          <span style="color: #bbb; font-weight: 500">#42</span>
+          <span style="color: #777">Polish sidebar UI</span>
+          <span style="color: #22c55e; margin-left: auto">&#10003;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inactive (collapsed) -->
+    <div style="margin: 0 12px 4px; padding: 14px 16px">
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">feat-auth</span>
+        <span style="font-size: 13px; color: #555">+846 -197</span>
+      </div>
+    </div>
+
+    <!-- Inactive (collapsed) -->
+    <div style="margin: 0 12px; padding: 14px 16px">
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">fix-terminal-resize</span>
+        <span style="font-size: 13px; color: #555">+58 -13</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== OPTION C ====== -->
+<div
+  class="option"
+  data-choice="inline-tags"
+  onclick="toggleSelect(this)"
+  style="margin-bottom: 32px"
+>
+  <div class="letter">C</div>
+  <div class="content">
+    <h3>Pill tags + accent bar</h3>
+    <p>Compact pill-shaped tags under the name. Blue accent bar for active item.</p>
+  </div>
+</div>
+
+<div class="mockup" style="margin-bottom: 32px">
+  <div class="mockup-header">C: Pill tags + accent bar</div>
+  <div
+    class="mockup-body"
+    style="
+      background: #141414;
+      color: #e5e5e5;
+      font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
+      padding: 20px 0;
+      min-height: 320px;
+    "
+  >
+    <!-- Active row -->
+    <div
+      style="
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        margin: 0 12px 8px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      "
+    >
+      <div
+        style="
+          width: 3px;
+          height: 36px;
+          border-radius: 2px;
+          background: #3b82f6;
+          flex-shrink: 0;
+          margin-top: 2px;
+        "
+      ></div>
+      <div style="flex: 1; min-width: 0">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+          "
+        >
+          <span style="font-size: 14px; font-weight: 600; color: #f0f0f0">ui-polish-1</span>
+          <span style="white-space: nowrap"
+            ><span style="color: #4ade80; font-size: 13px; font-weight: 500">+184</span
+            >&nbsp;&nbsp;<span style="color: #f87171; font-size: 13px; font-weight: 500"
+              >-17</span
+            ></span
+          >
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap">
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(139, 92, 246, 0.15);
+              color: #a78bfa;
+            "
+            >PR #42 &#10003;</span
+          >
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(34, 197, 94, 0.1);
+              color: #4ade80;
+            "
+            >CI &#10003;</span
+          >
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(255, 255, 255, 0.06);
+              color: #888;
+            "
+            >orca</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Inactive -->
+    <div
+      style="
+        margin: 0 12px 8px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      "
+    >
+      <div
+        style="
+          width: 3px;
+          height: 36px;
+          border-radius: 2px;
+          background: transparent;
+          flex-shrink: 0;
+          margin-top: 2px;
+        "
+      ></div>
+      <div style="flex: 1; min-width: 0">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+          "
+        >
+          <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">feat-auth</span>
+          <span style="font-size: 13px; color: #555">+846 -197</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px">
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(139, 92, 246, 0.15);
+              color: #a78bfa;
+            "
+            >PR #18</span
+          >
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(255, 255, 255, 0.06);
+              color: #888;
+            "
+            >orca</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Another -->
+    <div
+      style="margin: 0 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px"
+    >
+      <div
+        style="
+          width: 3px;
+          height: 36px;
+          border-radius: 2px;
+          background: transparent;
+          flex-shrink: 0;
+          margin-top: 2px;
+        "
+      ></div>
+      <div style="flex: 1; min-width: 0">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+          "
+        >
+          <span style="font-size: 14px; font-weight: 600; color: #e5e5e5">fix-terminal-resize</span>
+          <span style="font-size: 13px; color: #555">+58 -13</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px">
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(245, 158, 11, 0.15);
+              color: #f59e0b;
+            "
+            >Rebasing</span
+          >
+          <span
+            style="
+              font-size: 10px;
+              padding: 2px 8px;
+              border-radius: 12px;
+              background: rgba(255, 255, 255, 0.06);
+              color: #888;
+            "
+            >orca</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

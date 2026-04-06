@@ -19,8 +19,9 @@ export default function Landing(): React.JSX.Element {
   const [sessions, setSessions] = useState<SessionInfo[]>([])
 
   useEffect(() => {
-    const result = getRecentSessions(null, 8)
-    setSessions(result)
+    getRecentSessions(null, 8)
+      .then(setSessions)
+      .catch(() => setSessions([]))
   }, [])
 
   // Match sessions to worktree display names for badges

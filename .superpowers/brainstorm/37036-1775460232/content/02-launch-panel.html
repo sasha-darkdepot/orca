@@ -1,0 +1,665 @@
+<h2>Section 2: Launch Panel (inside worktree)</h2>
+<p class="subtitle">Shown when worktree is selected but no terminal is running. Pick a layout.</p>
+
+<div class="cards">
+  <!-- Option A: Compact horizontal -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 20px;
+          min-height: 280px;
+          display: flex;
+          flex-direction: column;
+        "
+      >
+        <!-- Tool buttons row -->
+        <div style="display: flex; gap: 8px; justify-content: center; padding: 16px 0">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 8px;
+              padding: 10px 16px;
+              font-size: 13px;
+              color: #e5e5e5;
+            "
+          >
+            <div style="width: 18px; height: 18px; border-radius: 4px; background: #d97706"></div>
+            Claude
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 8px;
+              padding: 10px 16px;
+              font-size: 13px;
+              color: #e5e5e5;
+            "
+          >
+            <div style="width: 18px; height: 18px; border-radius: 4px; background: #22c55e"></div>
+            Codex
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 8px;
+              padding: 10px 16px;
+              font-size: 13px;
+              color: #e5e5e5;
+            "
+          >
+            <div style="width: 18px; height: 18px; border-radius: 4px; background: #3b82f6"></div>
+            OpenCode
+          </div>
+        </div>
+
+        <!-- Sessions list -->
+        <div style="margin-top: 16px; padding: 0 12px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #666;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Recent sessions
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+                background: #1a1a1a;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator bug</span
+              >
+              <span style="font-size: 11px; color: #555; flex-shrink: 0">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor WorktreeCard to flat layout</span
+              >
+              <span style="font-size: 11px; color: #555; flex-shrink: 0">5h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >add colored folder icons for repo headers</span
+              >
+              <span style="font-size: 11px; color: #555; flex-shrink: 0">1d</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Compact</h3>
+      <p>
+        Tool buttons in a row at top, session list below. Dense, efficient. Feels like a quick
+        launcher — get in and go.
+      </p>
+    </div>
+  </div>
+
+  <!-- Option B: Centered hero -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 20px;
+          min-height: 280px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <!-- Worktree name -->
+        <div
+          style="
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #555;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+          "
+        >
+          ui-polish-1
+        </div>
+
+        <!-- Tool buttons grid -->
+        <div style="display: flex; gap: 12px; margin-bottom: 28px">
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+              width: 72px;
+              padding: 14px 0;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 10px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 28px; height: 28px; border-radius: 6px; background: #d97706"></div>
+            <span style="font-size: 11px; color: #aaa">Claude</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+              width: 72px;
+              padding: 14px 0;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 10px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 28px; height: 28px; border-radius: 6px; background: #22c55e"></div>
+            <span style="font-size: 11px; color: #aaa">Codex</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+              width: 72px;
+              padding: 14px 0;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 10px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 28px; height: 28px; border-radius: 6px; background: #3b82f6"></div>
+            <span style="font-size: 11px; color: #aaa">OpenCode</span>
+          </div>
+        </div>
+
+        <!-- Sessions -->
+        <div style="width: 100%; max-width: 340px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+              padding-left: 4px;
+            "
+          >
+            Today
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+                background: #141414;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator bug</span
+              >
+              <span style="font-size: 11px; color: #555">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor WorktreeCard to flat layout</span
+              >
+              <span style="font-size: 11px; color: #555">5h</span>
+            </div>
+          </div>
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin: 12px 0 8px;
+              padding-left: 4px;
+            "
+          >
+            Yesterday
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 7px 10px;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            <div
+              style="
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+                background: #d97706;
+                flex-shrink: 0;
+              "
+            ></div>
+            <span
+              style="
+                font-size: 12px;
+                color: #ccc;
+                flex: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              "
+              >add colored folder icons for repo headers</span
+            >
+            <span style="font-size: 11px; color: #555">1d</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Centered Hero</h3>
+      <p>
+        Worktree name as context, larger tool icons in a grid, sessions grouped by time below. Feels
+        like a home screen — breathes more, oriented around the worktree.
+      </p>
+    </div>
+  </div>
+
+  <!-- Option C: Split -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div
+        style="
+          background: #0a0a0a;
+          border-radius: 8px;
+          padding: 20px;
+          min-height: 280px;
+          display: flex;
+          gap: 16px;
+        "
+      >
+        <!-- Left: tools -->
+        <div
+          style="
+            flex-shrink: 0;
+            width: 90px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 4px;
+          "
+        >
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 4px;
+            "
+          >
+            Launch
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 8px 10px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 14px; height: 14px; border-radius: 3px; background: #d97706"></div>
+            <span style="font-size: 11px; color: #ccc">Claude</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 8px 10px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 14px; height: 14px; border-radius: 3px; background: #22c55e"></div>
+            <span style="font-size: 11px; color: #ccc">Codex</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 8px 10px;
+              background: #1a1a1a;
+              border: 1px solid #333;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            <div style="width: 14px; height: 14px; border-radius: 3px; background: #3b82f6"></div>
+            <span style="font-size: 11px; color: #ccc">OpenCode</span>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              padding: 8px 10px;
+              border: 1px dashed #333;
+              border-radius: 6px;
+              cursor: pointer;
+            "
+          >
+            <span style="font-size: 11px; color: #555">+ Shell</span>
+          </div>
+        </div>
+
+        <!-- Right: sessions -->
+        <div style="flex: 1; border-left: 1px solid #222; padding-left: 16px">
+          <div
+            style="
+              font-size: 10px;
+              text-transform: uppercase;
+              color: #555;
+              letter-spacing: 0.5px;
+              margin-bottom: 8px;
+            "
+          >
+            Sessions — ui-polish-1
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+                background: #141414;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >fix sidebar status indicator bug</span
+              >
+              <span style="font-size: 11px; color: #555">2h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #22c55e;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >refactor WorktreeCard to flat layout</span
+              >
+              <span style="font-size: 11px; color: #555">5h</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #d97706;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >add colored folder icons</span
+              >
+              <span style="font-size: 11px; color: #555">1d</span>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 10px;
+                border-radius: 6px;
+                cursor: pointer;
+              "
+            >
+              <div
+                style="
+                  width: 14px;
+                  height: 14px;
+                  border-radius: 3px;
+                  background: #3b82f6;
+                  flex-shrink: 0;
+                "
+              ></div>
+              <span
+                style="
+                  font-size: 12px;
+                  color: #ccc;
+                  flex: 1;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                "
+                >initial sidebar cleanup</span
+              >
+              <span style="font-size: 11px; color: #555">3d</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Split Panel</h3>
+      <p>
+        Tools on the left as a sidebar, sessions on the right. Clear separation of "start new" vs
+        "resume old". Scales well if you add more tools later.
+      </p>
+    </div>
+  </div>
+</div>

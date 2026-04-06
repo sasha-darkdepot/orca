@@ -62,8 +62,9 @@ export default function LaunchPanel({
   const [sessions, setSessions] = useState<SessionInfo[]>([])
 
   useEffect(() => {
-    const result = getRecentSessions(worktreePath, 10)
-    setSessions(result)
+    getRecentSessions(worktreePath, 10)
+      .then(setSessions)
+      .catch(() => setSessions([]))
   }, [worktreePath])
 
   const enabledTools = useMemo(() => toolConfigs.filter((t) => t.enabled), [toolConfigs])
