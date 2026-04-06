@@ -385,19 +385,10 @@ export const createTerminalSlice: StateCreator<AppState, [], [], TerminalSlice> 
       // FORK: don't restore any tabs — LaunchPanel handles session resumption.
       // Users can resume past sessions via LaunchPanel's session history,
       // so stale shell tabs from previous launches are just noise.
-      const tabsByWorktree: Record<string, TerminalTab[]> = {}
-
-      const validTabIds = new Set(
-        Object.values(tabsByWorktree)
-          .flat()
-          .map((tab) => tab.id)
-      )
       const activeWorktreeId =
         session.activeWorktreeId && validWorktreeIds.has(session.activeWorktreeId)
           ? session.activeWorktreeId
           : null
-      const activeTabId =
-        session.activeTabId && validTabIds.has(session.activeTabId) ? session.activeTabId : null
       const activeRepoId =
         session.activeRepoId && s.repos.some((repo) => repo.id === session.activeRepoId)
           ? session.activeRepoId
@@ -406,16 +397,10 @@ export const createTerminalSlice: StateCreator<AppState, [], [], TerminalSlice> 
       return {
         activeRepoId,
         activeWorktreeId,
-        activeTabId,
-        tabsByWorktree,
-        ptyIdsByTabId: Object.fromEntries(
-          Object.values(tabsByWorktree)
-            .flat()
-            .map((tab) => [tab.id, []] as const)
-        ),
-        terminalLayoutsByTabId: Object.fromEntries(
-          Object.entries(session.terminalLayoutsByTabId).filter(([tabId]) => validTabIds.has(tabId))
-        ),
+        activeTabId: null,
+        tabsByWorktree: {},
+        ptyIdsByTabId: {},
+        terminalLayoutsByTabId: {},
         workspaceSessionReady: true
       }
     })

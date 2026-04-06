@@ -11,6 +11,7 @@ import WorktreeContextMenu from './WorktreeContextMenu'
 import { cn } from '@/lib/utils'
 import { detectAgentStatusFromTitle } from '@/lib/agent-status'
 import { humanizeBranchName } from '@/lib/branch-display-name'
+import { branchName } from './worktree-list-groups'
 import type {
   Worktree,
   Repo,
@@ -21,10 +22,6 @@ import type {
 import type { Status } from './StatusIndicator'
 
 const EMPTY_TABS: TerminalTab[] = []
-
-function branchDisplayName(branch: string): string {
-  return branch.replace(/^refs\/heads\//, '')
-}
 
 const CONFLICT_OPERATION_LABELS: Record<Exclude<GitConflictOperation, 'unknown'>, string> = {
   merge: 'Merging',
@@ -81,7 +78,7 @@ const WorktreeCard = React.memo(function WorktreeCard({
     return liveTabs.length > 0 ? 'active' : 'inactive'
   }, [hasTerminals, tabs])
 
-  const branch = branchDisplayName(worktree.branch)
+  const branch = branchName(worktree.branch)
   const prCacheKey = repo && branch ? `${repo.path}::${branch}` : ''
   const issueCacheKey = repo && worktree.linkedIssue ? `${repo.path}::${worktree.linkedIssue}` : ''
 

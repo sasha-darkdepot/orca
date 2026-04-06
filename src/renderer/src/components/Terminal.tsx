@@ -25,7 +25,7 @@ export default function Terminal(): React.JSX.Element | null {
   const closeTab = useAppStore((s) => s.closeTab)
   const setActiveTab = useAppStore((s) => s.setActiveTab)
   const reorderTabs = useAppStore((s) => s.reorderTabs)
-  const setActiveWorktree = useAppStore((s) => s.setActiveWorktree)
+  // FORK: setActiveWorktree removed — last-tab-close no longer navigates away
   const setTabCustomTitle = useAppStore((s) => s.setTabCustomTitle)
   const setTabColor = useAppStore((s) => s.setTabColor)
   const consumeSuppressedPtyExit = useAppStore((s) => s.consumeSuppressedPtyExit)
@@ -177,7 +177,7 @@ export default function Terminal(): React.JSX.Element | null {
       }
       closeTab(tabId)
     },
-    [closeTab, setActiveTab, setActiveWorktree]
+    [closeTab, setActiveTab]
   )
 
   const handlePtyExit = useCallback(

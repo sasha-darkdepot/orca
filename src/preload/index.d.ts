@@ -207,18 +207,10 @@ type GitApi = {
 }
 
 // FORK: AI session history IPC
+import type { SessionInfo } from '../shared/fork-types'
+
 type AiSessionsApi = {
-  getRecent: (args: { worktreePath: string | null; limit: number }) => Promise<
-    {
-      id: string
-      toolId: string
-      title: string
-      startedAt: number
-      lastActiveAt: number
-      resumeCommand: string
-      worktreePath?: string
-    }[]
-  >
+  getRecent: (args: { worktreePath: string | null; limit: number }) => Promise<SessionInfo[]>
 }
 
 type Api = {

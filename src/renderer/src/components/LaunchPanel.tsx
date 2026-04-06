@@ -1,11 +1,11 @@
 // FORK: Launch Panel — shown inside a worktree when no terminal tabs exist.
 // Displays tool launch buttons and worktree-scoped session history.
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import { useAppStore } from '@/store'
 import { getRecentSessions, type SessionInfo } from '@/lib/session-providers'
 import { formatRelativeTime } from '@/lib/relative-time'
 import type { ToolConfig } from '@/lib/tool-defaults'
-import { TOOL_ICONS, GENERIC_TOOL_ICON } from '@/lib/tool-icons'
+import { TOOL_ICON_COMPONENTS, GenericToolIcon } from '@/lib/tool-icons'
 
 function groupSessionsByPeriod(
   sessions: SessionInfo[]
@@ -110,10 +110,9 @@ export default function LaunchPanel({
               onClick={() => launchTool(tool)}
               title={`Launch ${tool.name} (${index + 1})`}
             >
-              <div
-                className="w-10 h-10 text-foreground/80"
-                dangerouslySetInnerHTML={{ __html: TOOL_ICONS[tool.id] ?? GENERIC_TOOL_ICON }}
-              />
+              {React.createElement(TOOL_ICON_COMPONENTS[tool.id] ?? GenericToolIcon, {
+                className: 'w-10 h-10 text-foreground/80'
+              })}
               <span className="text-[15px] text-muted-foreground">{tool.name}</span>
             </button>
           ))}
@@ -135,12 +134,10 @@ export default function LaunchPanel({
                       onClick={() => resumeSession(session)}
                       title={`Resume: ${session.resumeCommand}`}
                     >
-                      <div
-                        className="w-[18px] h-[18px] shrink-0 text-foreground/50"
-                        dangerouslySetInnerHTML={{
-                          __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
-                        }}
-                      />
+                      {React.createElement(
+                        TOOL_ICON_COMPONENTS[session.toolId] ?? GenericToolIcon,
+                        { className: 'w-[18px] h-[18px] shrink-0 text-foreground/50' }
+                      )}
                       <span className="text-[14px] text-foreground/70 truncate flex-1">
                         {session.title}
                       </span>

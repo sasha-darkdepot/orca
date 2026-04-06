@@ -222,28 +222,13 @@ const api = {
 
     openFileUri: (uri: string): Promise<void> => ipcRenderer.invoke('shell:openFileUri', uri),
 
-    pathExists: (path: string): Promise<boolean> => ipcRenderer.invoke('shell:pathExists', path),
-
-    // FORK: expose HOME for session providers (renderer is sandboxed, no process.env)
-    homeDir: (): string => process.env.HOME ?? '/tmp'
+    pathExists: (path: string): Promise<boolean> => ipcRenderer.invoke('shell:pathExists', path)
   },
 
   // FORK: AI tool session history (reads from main process, no sandbox restrictions)
   aiSessions: {
-    getRecent: (args: {
-      worktreePath: string | null
-      limit: number
-    }): Promise<
-      {
-        id: string
-        toolId: string
-        title: string
-        startedAt: number
-        lastActiveAt: number
-        resumeCommand: string
-        worktreePath?: string
-      }[]
-    > => ipcRenderer.invoke('ai-sessions:getRecent', args)
+    getRecent: (args: { worktreePath: string | null; limit: number }) =>
+      ipcRenderer.invoke('ai-sessions:getRecent', args)
   },
 
   hooks: {

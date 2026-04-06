@@ -6,19 +6,10 @@ import { readdir, readFile, stat } from 'fs/promises'
 import { existsSync } from 'fs'
 import { join } from 'path'
 import { homedir } from 'os'
+import type { SessionInfo } from '../../shared/fork-types'
 
-type SessionInfo = {
-  id: string
-  toolId: string
-  title: string
-  startedAt: number
-  lastActiveAt: number
-  resumeCommand: string
-  worktreePath?: string
-}
-
-function decodeDirToPath(encoded: string): string {
-  return encoded.replace(/^-/, '/').replace(/-/g, '/')
+function encodePath(path: string): string {
+  return path.replace(/\//g, '-')
 }
 
 function extractTitle(content: string): string {
@@ -125,11 +116,15 @@ async function getClaudeSessions(
   }
 
   if (worktreePath !== null) {
-    const encoded = worktreePath.replace(/\//g, '-')
+    const encoded = encodePath(worktreePath)
     return readClaudeProjectDir(join(claudeDir, encoded), worktreePath, limit)
   }
 
-  // Global: scan all project dirs
+  // Global: scan all project dirs.
+  // Directory names are encoded paths (e.g. "-Users-sasha-project" for "/Users/sasha/project").
+  // The encoding is lossy (hyphens in paths become indistinguishable from separators),
+  // so we pass the raw directory name as worktreePath. The renderer matches sessions
+  // to worktrees by encoding each worktree's path and comparing against this value.
   const entries = await readdir(claudeDir, { withFileTypes: true })
   const all: SessionInfo[] = []
   for (const entry of entries) {
@@ -137,8 +132,7 @@ async function getClaudeSessions(
       continue
     }
     try {
-      const decoded = decodeDirToPath(entry.name)
-      const sessions = await readClaudeProjectDir(join(claudeDir, entry.name), decoded, limit)
+      const sessions = await readClaudeProjectDir(join(claudeDir, entry.name), entry.name, limit)
       all.push(...sessions)
     } catch {
       /* skip */

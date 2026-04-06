@@ -1,15 +1,8 @@
 // FORK: session provider — thin wrapper around ai-sessions IPC.
 // All filesystem access happens in main process (no sandbox restrictions).
 
-export type SessionInfo = {
-  id: string
-  toolId: string
-  title: string
-  startedAt: number
-  lastActiveAt: number
-  resumeCommand: string
-  worktreePath?: string
-}
+export type { SessionInfo } from '../../../shared/fork-types'
+import type { SessionInfo } from '../../../shared/fork-types'
 
 /**
  * Fetch recent AI tool sessions, optionally scoped to a worktree path.

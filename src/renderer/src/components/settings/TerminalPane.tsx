@@ -1,4 +1,3 @@
-// FORK: useState removed — no longer needed after theme picker removal
 import type { GlobalSettings } from '../../../../shared/types'
 import {
   DEFAULT_TERMINAL_FONT_WEIGHT,
@@ -12,7 +11,6 @@ import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { Separator } from '../ui/separator'
 import { ToggleGroup, ToggleGroupItem } from '../ui/toggle-group'
-// FORK: TerminalThemePreview import removed — theme picker removed
 import { Minus, Plus } from 'lucide-react'
 import { clampNumber, resolvePaneStyleOptions } from '@/lib/terminal-theme'
 import { NumberField, FontAutocomplete } from './SettingsFormControls'

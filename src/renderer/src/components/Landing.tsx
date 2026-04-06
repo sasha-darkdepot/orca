@@ -4,7 +4,8 @@ import { FolderPlus, GitBranchPlus } from 'lucide-react'
 import { useAppStore } from '../store'
 import { getRecentSessions, type SessionInfo } from '@/lib/session-providers'
 import { formatRelativeTime } from '@/lib/relative-time'
-import { TOOL_ICONS, GENERIC_TOOL_ICON } from '@/lib/tool-icons'
+import React from 'react'
+import { TOOL_ICON_COMPONENTS, GenericToolIcon } from '@/lib/tool-icons'
 import logo from '../../../../resources/logo.svg'
 
 export default function Landing(): React.JSX.Element {
@@ -29,11 +30,16 @@ export default function Landing(): React.JSX.Element {
     return Object.values(worktreesByRepo).flat()
   }, [worktreesByRepo])
 
+  // FORK: match sessions to worktrees. For scoped sessions, worktreePath is
+  // an actual path. For global sessions, it's an encoded directory name
+  // (e.g. "-Users-sasha-project"). We try both: direct path prefix match,
+  // then encoded path match.
   const matchWorktree = (session: SessionInfo) => {
     if (!session.worktreePath) {
       return null
     }
-    return allWorktrees.find((w) => session.worktreePath?.startsWith(w.path))
+    const sp = session.worktreePath
+    return allWorktrees.find((w) => sp.startsWith(w.path) || sp === w.path.replace(/\//g, '-'))
   }
 
   const handleSessionClick = (session: SessionInfo) => {
@@ -41,12 +47,11 @@ export default function Landing(): React.JSX.Element {
     if (!wt) {
       return
     }
+    // Activate worktree then create tab with resume command.
+    // createTab works synchronously on the store, so no race condition.
     setActiveWorktree(wt.id)
-    // Small delay to let worktree activation settle, then create tab with resume
-    setTimeout(() => {
-      const tab = createTab(wt.id)
-      queueTabStartupCommand(tab.id, { command: session.resumeCommand })
-    }, 50)
+    const tab = createTab(wt.id)
+    queueTabStartupCommand(tab.id, { command: session.resumeCommand })
   }
 
   return (
@@ -132,12 +137,10 @@ export default function Landing(): React.JSX.Element {
                       disabled={!wt}
                       title={wt ? `Resume in ${wt.displayName}` : 'Worktree no longer exists'}
                     >
-                      <div
-                        className="w-4 h-4 shrink-0 text-foreground/50"
-                        dangerouslySetInnerHTML={{
-                          __html: TOOL_ICONS[session.toolId] ?? GENERIC_TOOL_ICON
-                        }}
-                      />
+                      {React.createElement(
+                        TOOL_ICON_COMPONENTS[session.toolId] ?? GenericToolIcon,
+                        { className: 'w-4 h-4 shrink-0 text-foreground/50' }
+                      )}
                       <span className="text-[14px] text-foreground/60 truncate flex-1">
                         {session.title}
                       </span>

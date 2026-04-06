@@ -53,3 +53,6 @@ design-docs/
 .stably/*
 !.stably/docs/
 .playwright-cli
+
+# Superpowers brainstorm artifacts
+.superpowers/
